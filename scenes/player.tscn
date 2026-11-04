@@ -91,8 +91,9 @@ rotation = 3.1415927
 scale = Vector2(0.15249929, 0.17266048)
 texture = ExtResource("7_fjrip")
 
-[node name="Hitbox" type="Area2D" parent="WeaponPivot" unique_id=1295275981]
-monitorable = false
+[node name="Hitbox" type="Area2D" parent="WeaponPivot" unique_id=1295275981 groups=["player"]]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Hitbox" unique_id=1484221952]
 position = Vector2(55, -1)

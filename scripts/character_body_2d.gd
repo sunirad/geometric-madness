@@ -11,10 +11,11 @@ const ATTACK_TIME = 0.3
 var last_direction : Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var health: int = 100
+var hit_targets: Array[Node2D] = []
 
 func _ready() -> void:
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
-	hitbox.monitoring = false 
+	hitbox.monitoring = false
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not is_attacking:
@@ -67,6 +68,7 @@ func rotate_weapon_to_mouse() -> void:
 	weapon_pivot.rotation = direction.angle()
 
 func attack() -> void:
+	hit_targets.clear()
 	is_attacking = true
 	bite.play()
 	animated_sprite_2d.play("attack")
@@ -88,8 +90,22 @@ func attack() -> void:
 	is_attacking = false
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy") and is_attacking:
-		body.take_damage(10)
+	if not is_attacking:
+		return
+
+	if not body.is_in_group("enemy"):
+		return
+
+	if body in hit_targets:
+		return
+
+	if not body.has_method("take_damage"):
+		return
+
+	hit_targets.append(body)
+
+	print("SWORD HIT: ", body.name)
+	body.take_damage(10)
 		
 func die() -> void:
 	print("Player died!")
