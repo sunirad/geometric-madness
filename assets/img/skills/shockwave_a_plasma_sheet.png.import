@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf8y27y46qpie"
-path="res://.godot/imported/explosion_ground_a_classic_sheet_x4.png-7af0de5aef21e1c47989943e590e728a.ctex"
+uid="uid://upaa5y0vgwp0"
+path="res://.godot/imported/shockwave_a_plasma_sheet.png-b12763f5483a18baa7c821fa38df238f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/weapon/explosion_ground_a_classic_sheet_x4.png"
-dest_files=["res://.godot/imported/explosion_ground_a_classic_sheet_x4.png-7af0de5aef21e1c47989943e590e728a.ctex"]
+source_file="res://assets/img/skills/shockwave_a_plasma_sheet.png"
+dest_files=["res://.godot/imported/shockwave_a_plasma_sheet.png-b12763f5483a18baa7c821fa38df238f.ctex"]
 
 [params]
 

@@ -1,5 +1,6 @@
 extends CharacterBody2D
-
+@export var explosion_scene: PackedScene
+@export var explosion_distance: float = 150.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bite: AudioStreamPlayer2D = $bite
 @onready var weapon_pivot: Node2D = $WeaponPivot
@@ -72,20 +73,23 @@ func attack() -> void:
 	is_attacking = true
 	bite.play()
 	animated_sprite_2d.play("attack")
-	
+
 	rotate_weapon_to_mouse()
-	
+
 	var base_angle = weapon_pivot.rotation
-	
-	hitbox.monitoring = true 
-	
+
+	hitbox.monitoring = true
+
 	var tween = create_tween()
 	tween.tween_property(weapon_pivot, "rotation", base_angle - 1.04, 0.05)
 	tween.tween_property(weapon_pivot, "rotation", base_angle + 1.04, 0.1)
 	tween.tween_property(weapon_pivot, "rotation", base_angle, 0.15)
-	
+
 	await tween.finished
-	
+
+	# Взрыв в момент завершения удара мечом
+	create_ground_explosion()
+
 	hitbox.monitoring = false
 	is_attacking = false
 
@@ -121,3 +125,13 @@ func take_damage(amount: int) -> void:
 
 	if health <= 0:
 		die()
+func create_ground_explosion() -> void:
+	if explosion_scene == null:
+		return
+
+	var explosion = explosion_scene.instantiate()
+	get_tree().current_scene.add_child(explosion)
+
+	var direction = weapon_pivot.position.normalized()
+	explosion.global_position = global_position + direction * explosion_distance
+	

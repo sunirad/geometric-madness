@@ -13,5 +13,14 @@ collision_mask = 3
 [node name="InventoryUI" parent="." unique_id=1355701127 instance=ExtResource("3_sugp2")]
 
 [node name="enemy" parent="." unique_id=1696243300 instance=ExtResource("3_jyhfs")]
-position = Vector2(336, 328)
+position = Vector2(367.00003, 117)
 scale = Vector2(1.8487616, 1.8236352)
+
+[node name="enemy2" parent="." unique_id=1183982198 instance=ExtResource("3_jyhfs")]
+position = Vector2(117, 226)
+
+[node name="enemy3" parent="." unique_id=1635611102 instance=ExtResource("3_jyhfs")]
+position = Vector2(190, 388)
+
+[node name="enemy4" parent="." unique_id=1896597725 instance=ExtResource("3_jyhfs")]
+position = Vector2(377, 424)
