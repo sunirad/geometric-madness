@@ -6,6 +6,7 @@
 [node name="main" type="Node2D" unique_id=1608710082]
 
 [node name="player" parent="." unique_id=1977552922 instance=ExtResource("1_o5qli")]
+position = Vector2(564, 332)
 collision_mask = 3
 
 [node name="InventoryUI" parent="." unique_id=1355701127 instance=ExtResource("3_sugp2")]
