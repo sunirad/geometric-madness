@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5lyk2mdw6hh2"
-path="res://.godot/imported/geometric_sword.png-9939a870fb8416ffa0c3c3544aa7d73d.ctex"
+uid="uid://ddtvp7v1lfsaj"
+path="res://.godot/imported/noBKG_KnightDeath_strip.png-61476c71b798480e9c1c8d22f43d4172.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/geometric_sword.png"
-dest_files=["res://.godot/imported/geometric_sword.png-9939a870fb8416ffa0c3c3544aa7d73d.ctex"]
+source_file="res://assets/img/enemies/noBKG_KnightDeath_strip.png"
+dest_files=["res://.godot/imported/noBKG_KnightDeath_strip.png-61476c71b798480e9c1c8d22f43d4172.ctex"]
 
 [params]
 

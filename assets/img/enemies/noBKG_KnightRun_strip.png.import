@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy73ba6og6kdc"
-path="res://.godot/imported/Sword.png-cff8c47e7b7efcc154883eca4865d7e4.ctex"
+uid="uid://keaap34x7obb"
+path="res://.godot/imported/noBKG_KnightRun_strip.png-cf681284de9cfd7654e63db1348a7e7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/Sword.png"
-dest_files=["res://.godot/imported/Sword.png-cff8c47e7b7efcc154883eca4865d7e4.ctex"]
+source_file="res://assets/img/enemies/noBKG_KnightRun_strip.png"
+dest_files=["res://.godot/imported/noBKG_KnightRun_strip.png-cf681284de9cfd7654e63db1348a7e7e.ctex"]
 
 [params]
 

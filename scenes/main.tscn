@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b1wtwscruq4us"]
 
 [ext_resource type="PackedScene" uid="uid://d4hacwni2l3un" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dcltfc4kvwnq4" path="res://scenes/enemy.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://1gno84pmphit" path="res://scenes/inventory_ui.tscn" id="3_sugp2"]
 
 [node name="main" type="Node2D" unique_id=1608710082]
@@ -10,3 +11,7 @@ position = Vector2(564, 332)
 collision_mask = 3
 
 [node name="InventoryUI" parent="." unique_id=1355701127 instance=ExtResource("3_sugp2")]
+
+[node name="enemy" parent="." unique_id=1696243300 instance=ExtResource("3_jyhfs")]
+position = Vector2(336, 328)
+scale = Vector2(1.8487616, 1.8236352)
