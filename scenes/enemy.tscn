@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dcltfc4kvwnq4"]
 
 [ext_resource type="Texture2D" uid="uid://bsta1pelubvsi" path="res://assets/img/enemies/noBKG_KnightAttack_strip.png" id="1_4ra3w"]
+[ext_resource type="Script" uid="uid://cfup83o0vn08a" path="res://scripts/enemy.gd" id="1_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://ddtvp7v1lfsaj" path="res://assets/img/enemies/noBKG_KnightDeath_strip.png" id="2_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://nutnp103otn8" path="res://assets/img/enemies/noBKG_KnightIdle_strip.png" id="3_c4w8v"]
 
@@ -55,42 +56,6 @@ region = Rect2(1584, 0, 144, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ile5s"]
 atlas = ExtResource("1_4ra3w")
 region = Rect2(1728, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1x4g4"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(1872, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2pwtc"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(2016, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rogs8"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(2160, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wrm80"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(2304, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6awcb"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(2448, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wjec0"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(2592, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i4rgx"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(2736, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2mchx"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(2880, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t3vcr"]
-atlas = ExtResource("1_4ra3w")
-region = Rect2(3024, 0, 144, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qaulx"]
 atlas = ExtResource("2_5uy6h")
@@ -253,33 +218,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ile5s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1x4g4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2pwtc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rogs8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wrm80")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6awcb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wjec0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i4rgx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2mchx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t3vcr")
 }],
 "loop": 1,
 "name": &"attack",
@@ -383,20 +321,49 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle",
-"speed": 7.0
+"speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbfll"]
-size = Vector2(14, 26)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wv4m4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sbfll"]
+radius = 84.0
+height = 168.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wv4m4"]
+size = Vector2(34, 23.9093)
 
 [node name="enemy" type="CharacterBody2D" unique_id=1696243300]
+scale = Vector2(1, 1.0037935)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_5uy6h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=763501503]
 sprite_frames = SubResource("SpriteFrames_sbfll")
-animation = &"idle"
-frame_progress = 0.6877591
+animation = &"attack"
+frame_progress = 0.32795954
+metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=428202214]
-position = Vector2(1, -3)
-scale = Vector2(1, 0.9910019)
-shape = SubResource("RectangleShape2D_sbfll")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914897301]
+scale = Vector2(1.0015106, 0.9940515)
+shape = SubResource("CapsuleShape2D_wv4m4")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=61871523]
+collision_layer = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1631272438]
+shape = SubResource("CapsuleShape2D_sbfll")
+metadata/_edit_group_ = true
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=889414562]
+scale = Vector2(1.0037293, 1.0229774)
+collision_layer = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=874465812]
+position = Vector2(9, -0.9962211)
+shape = SubResource("RectangleShape2D_wv4m4")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_area_2d_body_entered"]

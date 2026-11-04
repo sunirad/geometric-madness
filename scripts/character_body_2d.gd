@@ -10,13 +10,14 @@ const SPEED = 300.0
 const ATTACK_TIME = 0.3
 var last_direction : Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
+var health: int = 100
 
 func _ready() -> void:
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	hitbox.monitoring = false 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("attack") and not is_attacking:
+	if Input.is_action_just_pressed("attack") and not is_attacking:
 		attack()
 		
 	process_movement()
@@ -89,3 +90,18 @@ func attack() -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy") and is_attacking:
 		body.take_damage(10)
+		
+func die() -> void:
+	print("Player died!")
+
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+
+	animated_sprite_2d.play("death")
+	
+func take_damage(amount: int) -> void:
+	health -= amount
+	print("Player health: ", health)
+
+	if health <= 0:
+		die()

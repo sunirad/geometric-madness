@@ -8,9 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://x0sso5nshxb0" path="res://assets/audio/crunchy-bite.mp3" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://cy73ba6og6kdc" path="res://assets/img/weapon/Sword.png" id="7_fjrip"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2acnk"]
-radius = 30.016663
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("1_dqkch")
 region = Rect2(0, 0, 256, 256)
@@ -62,14 +59,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2acnk"]
+radius = 30.016663
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mt7wh"]
 size = Vector2(60, 21)
 
 [node name="player" type="CharacterBody2D" unique_id=1977552922 groups=["player"]]
+collision_mask = 4
 script = ExtResource("1_qlg0r")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1336613771]
-shape = SubResource("CircleShape2D_2acnk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=392089904]
 texture_filter = 1
@@ -77,6 +75,9 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"attack"
 frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1336613771]
+shape = SubResource("CircleShape2D_2acnk")
 
 [node name="bite" type="AudioStreamPlayer2D" parent="." unique_id=398383430]
 stream = ExtResource("6_tuyoq")
