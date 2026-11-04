@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://1gno84pmphit"]
+
+[ext_resource type="Script" uid="uid://csuxpsr222ane" path="res://inventory_ui.gd" id="1_ylkvr"]
+[ext_resource type="PackedScene" uid="uid://bgwv6i6yk8iho" path="res://scenes/equipment/slot.tscn" id="2_mdwe3"]
+[ext_resource type="PackedScene" uid="uid://o2n1k323g48g" path="res://scenes/equipment/equip_slot_mid.tscn" id="3_2lmnb"]
+[ext_resource type="PackedScene" uid="uid://benp6s50dtp2u" path="res://scenes/equipment/equip_slot_big.tscn" id="3_iradw"]
+[ext_resource type="PackedScene" uid="uid://7ex61wcwl7r8" path="res://scenes/equipment/equip_slot_small.tscn" id="4_eifbp"]
+[ext_resource type="PackedScene" uid="uid://bwmb8sasjbs7n" path="res://scenes/equipment/equip_slot_belt.tscn" id="6_eicjl"]
+
+[node name="InventoryUI" type="CanvasLayer" unique_id=1355701127]
+process_mode = 3
+script = ExtResource("1_ylkvr")
+slot_scene = ExtResource("2_mdwe3")
+
+[node name="Background" type="Panel" parent="." unique_id=1451607076]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -552.0
+offset_right = -2.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="Background" unique_id=103399451]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EquipZone" type="Control" parent="Background/MainVBox" unique_id=1600095233]
+custom_minimum_size = Vector2(480, 300)
+layout_mode = 2
+
+[node name="EquipSlotHelm" parent="Background/MainVBox/EquipZone" unique_id=951727676 instance=ExtResource("3_2lmnb")]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 3.0
+offset_right = 272.0
+offset_bottom = 67.0
+
+[node name="EquipSlotArm" parent="Background/MainVBox/EquipZone" unique_id=1207638319 instance=ExtResource("3_iradw")]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 68.0
+offset_right = 272.0
+offset_bottom = 196.0
+
+[node name="EquipSlotAmulet" parent="Background/MainVBox/EquipZone" unique_id=2095334635 instance=ExtResource("4_eifbp")]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 93.0
+offset_right = 314.0
+offset_bottom = 133.0
+
+[node name="EquipSlotLRing" parent="Background/MainVBox/EquipZone" unique_id=652860086 instance=ExtResource("4_eifbp")]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 140.0
+offset_right = 206.0
+offset_bottom = 180.0
+
+[node name="EquipSlotRRing" parent="Background/MainVBox/EquipZone" unique_id=117824862 instance=ExtResource("4_eifbp")]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 140.0
+offset_right = 314.0
+offset_bottom = 180.0
+
+[node name="EquipSlotWeapon1" parent="Background/MainVBox/EquipZone" unique_id=1839217194 instance=ExtResource("3_iradw")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 68.0
+offset_right = 164.0
+offset_bottom = 196.0
+
+[node name="EquipSlotWeapon2" parent="Background/MainVBox/EquipZone" unique_id=1699036836 instance=ExtResource("3_iradw")]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 68.0
+offset_right = 380.0
+offset_bottom = 196.0
+
+[node name="EquipSlotBelt" parent="Background/MainVBox/EquipZone" unique_id=1626377451 instance=ExtResource("6_eicjl")]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 200.0
+offset_right = 272.0
+offset_bottom = 224.0
+
+[node name="EquipSlotGloves" parent="Background/MainVBox/EquipZone" unique_id=46605946 instance=ExtResource("3_2lmnb")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 197.0
+offset_right = 164.0
+offset_bottom = 261.0
+
+[node name="EquipSlotBoots" parent="Background/MainVBox/EquipZone" unique_id=1660865727 instance=ExtResource("3_2lmnb")]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 197.0
+offset_right = 380.0
+offset_bottom = 261.0
+
+[node name="BagGrid" type="GridContainer" parent="Background/MainVBox" unique_id=392916912]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+columns = 15

@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://d4hacwni2l3un"]
 
 [ext_resource type="Texture2D" uid="uid://cj1hqygdeldf2" path="res://assets/img/player/ViralEmoji - 115.png" id="1_dqkch"]
-[ext_resource type="Script" uid="uid://c85j6ka14aj3q" path="res://character_body_2d.gd" id="1_qlg0r"]
+[ext_resource type="Script" uid="uid://c85j6ka14aj3q" path="res://scripts/character_body_2d.gd" id="1_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://ddtnfg3lqp6rg" path="res://assets/img/player/ViralEmoji - 194.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dihd1yyuuky4n" path="res://assets/img/player/ViralEmoji - 54.png" id="3_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://dg7b6euwvwmta" path="res://assets/img/player/ViralEmoji - 7.png" id="4_fjrip"]
 [ext_resource type="AudioStream" uid="uid://x0sso5nshxb0" path="res://assets/audio/crunchy-bite.mp3" id="6_tuyoq"]
-[ext_resource type="Texture2D" uid="uid://cy73ba6og6kdc" path="res://assets/img/Sword.png" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://cy73ba6og6kdc" path="res://assets/img/weapon/Sword.png" id="7_fjrip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wh4ds"]
 size = Vector2(64, 64)
