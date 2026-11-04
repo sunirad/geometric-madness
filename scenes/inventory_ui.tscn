@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://csuxpsr222ane" path="res://scripts/inventory_ui.gd" id="1_ylkvr"]
 [ext_resource type="PackedScene" uid="uid://bgwv6i6yk8iho" path="res://scenes/equipment/slot.tscn" id="2_mdwe3"]
+[ext_resource type="Resource" uid="uid://bdsq6jiro8hjd" path="res://assets/items/sword.tres" id="3_1dxi5"]
 [ext_resource type="PackedScene" uid="uid://o2n1k323g48g" path="res://scenes/equipment/equip_slot_mid.tscn" id="3_2lmnb"]
 [ext_resource type="PackedScene" uid="uid://benp6s50dtp2u" path="res://scenes/equipment/equip_slot_big.tscn" id="3_iradw"]
+[ext_resource type="Resource" uid="uid://egcuolqtcgtm" path="res://assets/items/ring.tres" id="4_dqfnd"]
+[ext_resource type="Script" uid="uid://cykfkhp7wcgbo" path="res://scripts/inventory_slot.gd" id="4_eicjl"]
 [ext_resource type="PackedScene" uid="uid://7ex61wcwl7r8" path="res://scenes/equipment/equip_slot_small.tscn" id="4_eifbp"]
 [ext_resource type="PackedScene" uid="uid://bwmb8sasjbs7n" path="res://scenes/equipment/equip_slot_belt.tscn" id="6_eicjl"]
 
@@ -11,6 +14,8 @@
 process_mode = 3
 script = ExtResource("1_ylkvr")
 slot_scene = ExtResource("2_mdwe3")
+start_weapon = ExtResource("3_1dxi5")
+start_ring = ExtResource("4_dqfnd")
 
 [node name="Background" type="Panel" parent="." unique_id=1451607076]
 anchors_preset = 11
@@ -44,6 +49,8 @@ offset_left = 208.0
 offset_top = 3.0
 offset_right = 272.0
 offset_bottom = 67.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([1])
 
 [node name="EquipSlotArm" parent="Background/MainVBox/EquipZone" unique_id=1207638319 instance=ExtResource("3_iradw")]
 layout_mode = 0
@@ -51,6 +58,8 @@ offset_left = 208.0
 offset_top = 68.0
 offset_right = 272.0
 offset_bottom = 196.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([2])
 
 [node name="EquipSlotAmulet" parent="Background/MainVBox/EquipZone" unique_id=2095334635 instance=ExtResource("4_eifbp")]
 layout_mode = 0
@@ -58,6 +67,8 @@ offset_left = 274.0
 offset_top = 93.0
 offset_right = 314.0
 offset_bottom = 133.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([4])
 
 [node name="EquipSlotLRing" parent="Background/MainVBox/EquipZone" unique_id=652860086 instance=ExtResource("4_eifbp")]
 layout_mode = 0
@@ -65,6 +76,8 @@ offset_left = 166.0
 offset_top = 140.0
 offset_right = 206.0
 offset_bottom = 180.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([3])
 
 [node name="EquipSlotRRing" parent="Background/MainVBox/EquipZone" unique_id=117824862 instance=ExtResource("4_eifbp")]
 layout_mode = 0
@@ -72,6 +85,8 @@ offset_left = 274.0
 offset_top = 140.0
 offset_right = 314.0
 offset_bottom = 180.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([3])
 
 [node name="EquipSlotWeapon1" parent="Background/MainVBox/EquipZone" unique_id=1839217194 instance=ExtResource("3_iradw")]
 layout_mode = 0
@@ -79,6 +94,8 @@ offset_left = 100.0
 offset_top = 68.0
 offset_right = 164.0
 offset_bottom = 196.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([0])
 
 [node name="EquipSlotWeapon2" parent="Background/MainVBox/EquipZone" unique_id=1699036836 instance=ExtResource("3_iradw")]
 layout_mode = 0
@@ -86,6 +103,8 @@ offset_left = 316.0
 offset_top = 68.0
 offset_right = 380.0
 offset_bottom = 196.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([0])
 
 [node name="EquipSlotBelt" parent="Background/MainVBox/EquipZone" unique_id=1626377451 instance=ExtResource("6_eicjl")]
 layout_mode = 0
@@ -100,6 +119,8 @@ offset_left = 100.0
 offset_top = 197.0
 offset_right = 164.0
 offset_bottom = 261.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([5])
 
 [node name="EquipSlotBoots" parent="Background/MainVBox/EquipZone" unique_id=1660865727 instance=ExtResource("3_2lmnb")]
 layout_mode = 0
@@ -107,6 +128,8 @@ offset_left = 316.0
 offset_top = 197.0
 offset_right = 380.0
 offset_bottom = 261.0
+script = ExtResource("4_eicjl")
+allowed_types = Array[int]([6])
 
 [node name="BagGrid" type="GridContainer" parent="Background/MainVBox" unique_id=392916912]
 custom_minimum_size = Vector2(480, 0)

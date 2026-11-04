@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://bwmb8sasjbs7n"]
 
+[ext_resource type="Script" uid="uid://cykfkhp7wcgbo" path="res://scripts/inventory_slot.gd" id="1_436h4"]
+
 [node name="EquipSlotBelt" type="Panel" unique_id=1626377451]
 custom_minimum_size = Vector2(64, 24)
 offset_right = 64.0
 offset_bottom = 16.0
+script = ExtResource("1_436h4")
+allowed_types = Array[int]([7])
 
 [node name="ItemIcon" type="TextureRect" parent="." unique_id=1911110576]
 layout_mode = 1
@@ -12,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 
 [node name="AmountLabel" type="Label" parent="." unique_id=1620383483]
 layout_mode = 0

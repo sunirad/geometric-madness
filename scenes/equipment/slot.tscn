@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bgwv6i6yk8iho"]
 
+[ext_resource type="Script" uid="uid://cykfkhp7wcgbo" path="res://scripts/inventory_slot.gd" id="1_l2wlc"]
+
 [node name="Slot" type="Panel" unique_id=247170477]
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = -1
@@ -13,6 +15,7 @@ offset_right = 25.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_l2wlc")
 
 [node name="ItemIcon" type="TextureRect" parent="." unique_id=429405140]
 layout_mode = 1
@@ -21,7 +24,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
+stretch_mode = 5
 
 [node name="AmountLabel" type="Label" parent="." unique_id=1821534196]
 visible = false

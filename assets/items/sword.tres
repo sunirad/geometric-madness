@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bdsq6jiro8hjd"]
+
+[ext_resource type="Texture2D" uid="uid://cy73ba6og6kdc" path="res://assets/img/weapon/Sword.png" id="1_s3sdd"]
+[ext_resource type="Script" uid="uid://dbplmdhd05ooy" path="res://scripts/item_data.gd" id="1_tu3o1"]
+
+[resource]
+script = ExtResource("1_tu3o1")
+item_name = "Steel Sword"
+icon = ExtResource("1_s3sdd")
+item_type = 0
+metadata/_custom_type_script = "uid://dbplmdhd05ooy"
