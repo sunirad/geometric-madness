@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var hitbox: Area2D = $WeaponPivot/Hitbox
 @onready var sword_sprite: Sprite2D = $WeaponPivot/SwordSprite
-
+@export var weapon_orbit_radius: float = 35.0
 const SPEED = 300.0
 const ATTACK_TIME = 0.3
 var last_direction : Vector2 = Vector2.RIGHT
@@ -16,7 +16,7 @@ func _ready() -> void:
 	hitbox.monitoring = false 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("attack") and not is_attacking:
+	if Input.is_action_pressed("attack") and not is_attacking:
 		attack()
 		
 	process_movement()
@@ -52,14 +52,18 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 
 func rotate_weapon_to_mouse() -> void:
 	var mouse_pos = get_global_mouse_position()
-	var dir_to_mouse = mouse_pos - global_position
-	
-	weapon_pivot.rotation = dir_to_mouse.angle()
-	
-	if dir_to_mouse.x < 0:
-		sword_sprite.flip_v = true
-	else:
-		sword_sprite.flip_v = false
+
+	# Направление от персонажа к мышке
+	var direction = to_local(mouse_pos)
+
+	if direction.length_squared() == 0:
+		return
+
+	# Перемещаем рукоять по орбите
+	weapon_pivot.position = direction.normalized() * weapon_orbit_radius
+
+	# Направляем меч на мышку
+	weapon_pivot.rotation = direction.angle()
 
 func attack() -> void:
 	is_attacking = true
