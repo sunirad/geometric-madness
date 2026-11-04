@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://d4hacwni2l3un"]
+
+[ext_resource type="Texture2D" uid="uid://cj1hqygdeldf2" path="res://assets/img/player/ViralEmoji - 115.png" id="1_dqkch"]
+[ext_resource type="Script" uid="uid://48rah4g0iw70" path="res://scripts/main_char.gd" id="1_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://ddtnfg3lqp6rg" path="res://assets/img/player/ViralEmoji - 194.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://dihd1yyuuky4n" path="res://assets/img/player/ViralEmoji - 54.png" id="3_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://dg7b6euwvwmta" path="res://assets/img/player/ViralEmoji - 7.png" id="4_fjrip"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("1_dqkch")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("3_tuyoq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("4_fjrip")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sbfll"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}],
+"loop": 1,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=1415525905]
+
+[node name="MainChar" type="CharacterBody2D" parent="." unique_id=171963806]
+script = ExtResource("1_qlg0r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MainChar" unique_id=1778863469]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_sbfll")
+animation = &"death"
