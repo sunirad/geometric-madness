@@ -4,5 +4,5 @@
 
 [node name="main" type="Node2D" unique_id=1608710082]
 
-[node name="CharacterBody2D" parent="." unique_id=1977552922 instance=ExtResource("1_o5qli")]
-position = Vector2(619, 323)
+[node name="player" parent="." unique_id=1977552922 instance=ExtResource("1_o5qli")]
+collision_mask = 3
