@@ -3,13 +3,13 @@ extends CharacterBody2D
 @export var explosion_scene: PackedScene
 @export var explosion_distance: float = 150.0
 @export var player_stats: PlayerStats # <-- Ссылка на данные
+@export var weapon_orbit_radius: float = 35.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bite: AudioStreamPlayer2D = $bite
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var hitbox: Area2D = $WeaponPivot/Hitbox
 @onready var sword_sprite: Sprite2D = $WeaponPivot/SwordSprite
-@export var weapon_orbit_radius: float = 35.0
 
 const SPEED = 300.0
 const ATTACK_TIME = 0.3
@@ -17,6 +17,10 @@ const ATTACK_TIME = 0.3
 var last_direction : Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var hit_targets: Array[Node2D] = []
+
+func _enter_tree() -> void:
+	# Добавляемся в группу, чтобы панель скиллов могла нас найти
+	add_to_group("player")
 
 func _ready() -> void:
 	hitbox.monitoring = false
@@ -28,9 +32,9 @@ func _ready() -> void:
 			player_stats = stats_nodes[0]
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("attack") and not is_attacking:
-		attack()
-		
+	# УБРАЛИ строку if Input.is_action_pressed("attack")...
+	# Теперь атака управляется через панель скиллов
+	
 	process_movement()
 	process_animation()
 	
@@ -72,7 +76,11 @@ func rotate_weapon_to_mouse() -> void:
 	weapon_pivot.position = direction.normalized() * weapon_orbit_radius
 	weapon_pivot.rotation = direction.angle()
 
+# ВАЖНО: убираем await tween.finished, чтобы атака не блокировала физику
 func attack() -> void:
+	if is_attacking:
+		return # Защита от спама
+		
 	hit_targets.clear()
 	is_attacking = true
 	bite.play()
@@ -88,7 +96,8 @@ func attack() -> void:
 	tween.tween_property(weapon_pivot, "rotation", base_angle + 1.04, 0.1)
 	tween.tween_property(weapon_pivot, "rotation", base_angle, 0.15)
 
-	await tween.finished
+	# Ждем завершения анимации через таймер, не блокируя код
+	await get_tree().create_timer(0.3).timeout
 
 	create_ground_explosion()
 

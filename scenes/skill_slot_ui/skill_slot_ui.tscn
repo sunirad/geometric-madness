@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://87lk1s8dfh3o"]
+
+[ext_resource type="Script" uid="uid://l3eh4hn0uoxr" path="res://scripts/skill_data/skill_slot_ui.gd" id="1_trlsq"]
+
+[node name="SkillSlotUI" type="Control" unique_id=266401646]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_trlsq")
+
+[node name="Background" type="ColorRect" parent="." unique_id=105645367]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3491902, 0.3491902, 0.3491902, 0.8)
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1334573716]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="KeyLabel" type="Label" parent="." unique_id=503751645]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -26.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+vertical_alignment = 2
