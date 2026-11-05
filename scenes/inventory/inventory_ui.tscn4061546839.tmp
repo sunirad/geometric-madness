@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dqipl4c5hc0se"]
+
+[ext_resource type="Script" uid="uid://c01r6x1ffflka" path="res://scripts/inventory/ui/inventory_ui.gd" id="1_qedko"]
+[ext_resource type="Script" uid="uid://cr6db76gpet84" path="res://scripts/inventory/ui/equipment_ui.gd" id="2_3yj3k"]
+[ext_resource type="Script" uid="uid://cu8rb85cyd5vd" path="res://scripts/inventory/ui/backpack_ui.gd" id="3_8ojme"]
+
+[node name="InventoryUi" type="CanvasLayer" unique_id=1382271037]
+script = ExtResource("1_qedko")
+
+[node name="Root" type="Control" parent="." unique_id=297523644]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightPanel" type="PanelContainer" parent="Root" unique_id=977916950]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBox" type="VBoxContainer" parent="Root/RightPanel" unique_id=1642370713]
+layout_mode = 2
+
+[node name="EquipmentArea" type="Control" parent="Root/RightPanel/VBox" unique_id=1120314300]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_3yj3k")
+
+[node name="BackpackArea" type="Control" parent="Root/RightPanel/VBox" unique_id=1247768526]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+script = ExtResource("3_8ojme")

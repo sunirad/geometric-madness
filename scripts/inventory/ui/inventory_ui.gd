@@ -48,11 +48,11 @@ func setup_inventory(p_equipment: Equipment, p_backpack: BackpackGrid) -> void:
 	if eq_ui:
 		eq_ui.set_equipment(p_equipment)
 		eq_ui.inventory_ui = self
+		eq_ui.backpack_ui = bp_ui
 	if bp_ui:
 		bp_ui.set_backpack(p_backpack)
 		bp_ui.inventory_ui = self
 
-# Убрали offset, просто передаем предмет.
 func start_drag(item: EquipItemData) -> void:
 	dragged_item = item
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -68,15 +68,11 @@ func _process(_delta: float) -> void:
 
 func _draw_dragged_item() -> void:
 	if dragged_item == null: return
-	
 	var mouse_pos = get_viewport().get_mouse_position()
 	var item_size = dragged_item.grid_size * 32.0
-	
-	# Рисуем так, чтобы ЛЕВЫЙ ВЕРХНИЙ УГОЛ был ровно под мышкой.
 	var draw_rect = Rect2(mouse_pos, item_size)
 	
 	_drag_canvas.draw_rect(draw_rect, Color(0.25, 0.25, 0.3, 0.8))
 	_drag_canvas.draw_rect(draw_rect, Color(0.3, 0.3, 0.3), false, 2.0)
-	
 	if dragged_item.icon != null:
 		_drag_canvas.draw_texture_rect(dragged_item.icon, draw_rect.grow(-4.0), false)

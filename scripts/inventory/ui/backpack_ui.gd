@@ -17,6 +17,8 @@ const PADDING: float = 2.0
 func _ready() -> void:
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
+	# Разрешаем кликам проходить сквозь пустые места
+	mouse_filter = Control.MOUSE_FILTER_PASS 
 	_update_layout.call_deferred()
 
 func set_backpack(p_backpack: BackpackGrid) -> void:
@@ -86,7 +88,6 @@ func _get_item_top_left(item: EquipItemData) -> Vector2i:
 		return backpack.get_origin(item)
 	return Vector2i(-1, -1)
 
-# Переименовали параметр size в item_size, чтобы не конфликтовать с базовым классом.
 func _get_overlapping_items(origin: Vector2i, item_size: Vector2i) -> Array:
 	var overlaps = []
 	if backpack == null: return overlaps
@@ -106,7 +107,19 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if inventory_ui == null: return
 		
-		var grid_pos = _get_grid_pos(get_local_mouse_position())
+		var mouse_pos = get_local_mouse_position()
+		
+		# Проверяем, попали ли мы в сетку рюкзака.
+		var grid_width = COLUMNS * CELL_SIZE
+		var grid_height = ROWS * CELL_SIZE
+		var start_x = (size.x - grid_width) / 2.0
+		var start_y = (size.y - grid_height) / 2.0
+		var grid_rect = Rect2(start_x, start_y, grid_width, grid_height)
+		
+		if not grid_rect.has_point(mouse_pos):
+			return # Клик не в сетке рюкзака, пропускаем (пусть ловит экипировка).
+		
+		var grid_pos = _get_grid_pos(mouse_pos)
 		
 		if backpack != null:
 			var clicked_item = backpack.get_item_at(grid_pos)
@@ -123,27 +136,21 @@ func _gui_input(event: InputEvent) -> void:
 				var item_in_hand = inventory_ui.dragged_item
 				var target_origin = grid_pos
 				
-				# Ищем ВСЕ предметы, которые задевает наш предмет при установке.
 				var overlapping_items = _get_overlapping_items(target_origin, item_in_hand.grid_size)
 				
 				if overlapping_items.size() > 0:
 					var swap_item = overlapping_items[0]
 					var swap_origin = _get_item_top_left(swap_item)
 					
-					# Временно убираем этот предмет из сетки.
 					backpack.remove(swap_item)
 					
-					# Проверяем, помещается ли предмет из рук в область, куда мы кликнули.
 					if backpack.can_place(item_in_hand, target_origin):
 						backpack.place(item_in_hand, target_origin)
-						# Берем вытесненный предмет в руку.
 						inventory_ui.start_drag(swap_item)
 					else:
-						# Если предмет из рук не влезает — возвращаем старый предмет на место.
 						backpack.place(swap_item, swap_origin)
 						print("ERROR: Cannot swap items - not enough space!")
 				else:
-					# Если ничего не задеваем, просто кладем в пустое место.
 					if backpack.can_place(item_in_hand, target_origin):
 						backpack.place(item_in_hand, target_origin)
 						inventory_ui.stop_drag()
