@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RingData" format=3 uid="uid://cj0kmo8n2awxh"]
+
+[ext_resource type="Texture2D" uid="uid://dv12u5n8jvyjx" path="res://assets/img/ring/armor_063.png" id="1_ken2m"]
+[ext_resource type="Script" uid="uid://ctf2f0ih4rag0" path="res://scripts/inventory/equipment/ring_data.gd" id="1_pf136"]
+
+[resource]
+script = ExtResource("1_pf136")
+icon = ExtResource("1_ken2m")
+metadata/_custom_type_script = "uid://ctf2f0ih4rag0"
