@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cxpnrrmi1fq35"]
+
+[ext_resource type="PackedScene" uid="uid://87lk1s8dfh3o" path="res://scenes/skill_slot_ui/skill_slot_ui.tscn" id="1_ilxfe"]
+[ext_resource type="Script" uid="uid://bs0xlcgrobeee" path="res://scripts/skill_data/skill_bar_ui.gd" id="1_se5xg"]
+[ext_resource type="Script" uid="uid://dnny8se7m12ha" path="res://scripts/skill_data/skill_picker.gd" id="4_rwvkj"]
+
+[node name="SkillBarUI" type="Control" unique_id=647271601]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1500.0
+offset_bottom = -930.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_se5xg")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1967999648]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TopRow" type="HBoxContainer" parent="VBox" unique_id=1841110394]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 2
+
+[node name="SkillSlotUi" parent="VBox/TopRow" unique_id=266401646 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="SkillSlotUi2" parent="VBox/TopRow" unique_id=844545305 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="SkillSlotUi3" parent="VBox/TopRow" unique_id=264351794 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="BottomRow" type="HBoxContainer" parent="VBox" unique_id=1868984181]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 2
+
+[node name="SkillSlotUi" parent="VBox/BottomRow" unique_id=452492201 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="SkillSlotUi2" parent="VBox/BottomRow" unique_id=1893666564 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="SkillSlotUi3" parent="VBox/BottomRow" unique_id=1386454358 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="SkillSlotUi4" parent="VBox/BottomRow" unique_id=681383747 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="SkillSlotUi5" parent="VBox/BottomRow" unique_id=723283292 instance=ExtResource("1_ilxfe")]
+layout_mode = 2
+
+[node name="SkillPicker" type="Control" parent="." unique_id=518928858]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 100.0
+script = ExtResource("4_rwvkj")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SkillPicker" unique_id=1362709447]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IconContainer" type="HBoxContainer" parent="SkillPicker/ScrollContainer" unique_id=1335707387]
+layout_mode = 2

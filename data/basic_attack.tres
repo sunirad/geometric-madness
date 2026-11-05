@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://dnvo8nr665pk2"]
+
+[ext_resource type="Texture2D" uid="uid://cy73ba6og6kdc" path="res://assets/img/weapon/Sword.png" id="1_e55ui"]
+[ext_resource type="Script" uid="uid://bb2npinnkfaft" path="res://scripts/skill_data/skill_data.gd" id="1_owbmm"]
+
+[resource]
+script = ExtResource("1_owbmm")
+icon = ExtResource("1_e55ui")
+description = "Deals 10 damage"
+metadata/_custom_type_script = "uid://bb2npinnkfaft"

@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://bvgta1oqtxega" path="res://data/player_stats_data.tres" id="9_choun"]
 [ext_resource type="PackedScene" uid="uid://b5p01kv4e3psm" path="res://scenes/vitals_orb.tscn" id="11_trceg"]
 [ext_resource type="Script" uid="uid://ykdlvjrtalwy" path="res://scripts/vital_orbs/hud.gd.gd" id="12_trceg"]
+[ext_resource type="PackedScene" uid="uid://cxpnrrmi1fq35" path="res://scenes/skill_slot_ui/skill_bar_ui.tscn" id="14_a8y0u"]
 
 [node name="main" type="Node2D" unique_id=1608710082 groups=["main"]]
 script = ExtResource("1_ya4ey")
@@ -74,6 +75,16 @@ player_stats = NodePath("../PlayerStats")
 script = ExtResource("7_tipki")
 stats = ExtResource("9_choun")
 metadata/_custom_type_script = "uid://b4qqqbmsbrwj"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1109516252]
+
+[node name="SkillBarUI" parent="CanvasLayer" unique_id=647271601 instance=ExtResource("14_a8y0u")]
+process_mode = 3
+offset_left = 1302.0
+offset_top = 910.0
+offset_right = -198.0
+offset_bottom = -20.0
+mouse_filter = 1
 
 [node name="LevelRoot" parent="." unique_id=1887704058 instance=ExtResource("7_85g3d")]
 position = Vector2(2, 0)
