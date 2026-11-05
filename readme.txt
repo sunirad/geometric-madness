@@ -11,3 +11,7 @@
 
 Загрузка изменений с репозитория:
     git pull origin
+
+Если активный мердж реквест:
+    git add .
+    git commit -m "Complete merge"

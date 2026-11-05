@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ico0qet2dv4t"]
+
+[ext_resource type="Texture2D" uid="uid://d2j40uasc5g5g" path="res://assets/img/items/boots/icon_114.png" id="1_iajge"]
+[ext_resource type="Texture2D" uid="uid://cbn7earw4xacb" path="res://assets/img/items/boots/icon_124.png" id="2_tmrcf"]
+[ext_resource type="Texture2D" uid="uid://bjn826btw21js" path="res://assets/img/items/boots/icon_134.png" id="3_mn8cu"]
+[ext_resource type="Texture2D" uid="uid://dv5uwjya7n1bf" path="res://assets/img/items/chest/icon_112.png" id="4_gb2pk"]
+
+[node name="Node2D" type="Node2D" unique_id=670756652]
+
+[node name="steelboots" type="Sprite2D" parent="." unique_id=1486280492]
+position = Vector2(62, 62)
+texture = ExtResource("1_iajge")
+
+[node name="obsidianboots" type="Sprite2D" parent="." unique_id=627620474]
+position = Vector2(204, 62)
+texture = ExtResource("2_tmrcf")
+
+[node name="leafboots" type="Sprite2D" parent="." unique_id=705858304]
+position = Vector2(350, 63)
+texture = ExtResource("3_mn8cu")
+
+[node name="steelChest" type="Sprite2D" parent="." unique_id=2049698687]
+position = Vector2(502, 61)
+texture = ExtResource("4_gb2pk")
