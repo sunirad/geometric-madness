@@ -1,16 +1,64 @@
 [gd_scene format=3 uid="uid://b1wtwscruq4us"]
 
 [ext_resource type="PackedScene" uid="uid://dqipl4c5hc0se" path="res://scenes/inventory/inventory_ui.tscn" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://dptqvbkf4ctb6" path="res://scripts/main.gd" id="1_ya4ey"]
 [ext_resource type="Resource" uid="uid://bl3ebxr4u33sk" path="res://assets/items/sword_iron.tres" id="3_tipki"]
 [ext_resource type="Resource" uid="uid://bamw2b14qfv64" path="res://assets/items/sword_two_hand.tres" id="4_85g3d"]
 [ext_resource type="Script" uid="uid://dmxy6bu872oqe" path="res://scripts/inventory/ui/inventory_manager.gd" id="4_jyhfs"]
 [ext_resource type="Resource" uid="uid://cj0kmo8n2awxh" path="res://assets/items/ring_gold.tres" id="5_choun"]
 [ext_resource type="Resource" uid="uid://bfo3s2dnrh65j" path="res://assets/items/helmet_iron.tres" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://b0jdrt1jp83wm" path="res://scenes/level_root.tscn" id="7_85g3d"]
+[ext_resource type="PackedScene" uid="uid://gp80xyyq32l1" path="res://scenes/character_sheet/character_sheet_ui.tscn" id="7_choun"]
+[ext_resource type="Script" uid="uid://b4qqqbmsbrwj" path="res://scripts/character_list/player/player_stats.gd" id="7_tipki"]
+[ext_resource type="Resource" uid="uid://bvgta1oqtxega" path="res://data/player_stats_data.tres" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://b5p01kv4e3psm" path="res://scenes/vitals_orb.tscn" id="11_trceg"]
+[ext_resource type="Script" uid="uid://ykdlvjrtalwy" path="res://scripts/vital_orbs/hud.gd.gd" id="12_trceg"]
 
-[node name="main" type="Node2D" unique_id=1608710082]
+[node name="main" type="Node2D" unique_id=1608710082 groups=["main"]]
+script = ExtResource("1_ya4ey")
 
-[node name="InventoryUI" parent="." unique_id=1382271037 instance=ExtResource("1_sugp2")]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=363095770 node_paths=PackedStringArray("player_stats", "hp_orb", "mp_orb")]
+script = ExtResource("12_trceg")
+player_stats = NodePath("../PlayerStats")
+hp_orb = NodePath("RootUI/HpOrb")
+mp_orb = NodePath("RootUI/MpOrb")
+
+[node name="RootUI" type="Control" parent="HUD" unique_id=1310187009]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HpOrb" parent="HUD/RootUI" unique_id=1109389557 instance=ExtResource("11_trceg")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -165.0
+offset_right = 148.0
+offset_bottom = -37.0
+grow_vertical = 0
+
+[node name="MpOrb" parent="HUD/RootUI" unique_id=609484248 instance=ExtResource("11_trceg")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -165.0
+offset_right = -47.0
+offset_bottom = -37.0
+grow_horizontal = 0
+grow_vertical = 0
+fill_color = Color(0.3491902, 0.58383155, 0.95468724, 1)
+
+[node name="InventoryUI" parent="." unique_id=1382271037 groups=["closable_ui"] instance=ExtResource("1_sugp2")]
 
 [node name="InventoryManager" type="Node" parent="." unique_id=731406284]
 script = ExtResource("4_jyhfs")
@@ -18,6 +66,14 @@ start_sword = ExtResource("3_tipki")
 start_two_hand = ExtResource("4_85g3d")
 start_ring = ExtResource("5_choun")
 start_helmet = ExtResource("6_ya4ey")
+
+[node name="CharacterSheetUI" parent="." unique_id=844527856 node_paths=PackedStringArray("player_stats") groups=["closable_ui"] instance=ExtResource("7_choun")]
+player_stats = NodePath("../PlayerStats")
+
+[node name="PlayerStats" type="Node" parent="." unique_id=1857613223 groups=["player_stats"]]
+script = ExtResource("7_tipki")
+stats = ExtResource("9_choun")
+metadata/_custom_type_script = "uid://b4qqqbmsbrwj"
 
 [node name="LevelRoot" parent="." unique_id=1887704058 instance=ExtResource("7_85g3d")]
 position = Vector2(2, 0)

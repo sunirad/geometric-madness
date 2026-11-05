@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bvgta1oqtxega"]
+
+[ext_resource type="Script" uid="uid://dewc0872a22y2" path="res://scripts/character_list/character_stats.gd" id="1_f2s5w"]
+
+[resource]
+script = ExtResource("1_f2s5w")
+base_agility = 12
+base_intelligence = 8
+metadata/_custom_type_script = "uid://dewc0872a22y2"

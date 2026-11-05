@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b5p01kv4e3psm"]
+
+[ext_resource type="Script" uid="uid://d3ilh0otkpwpi" path="res://scripts/vital_orbs/vitals_orb.gd" id="1_pm5go"]
+
+[node name="VitalsOrb" type="Control" unique_id=1109389557]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_pm5go")

@@ -1,21 +1,31 @@
 extends CharacterBody2D
+
 @export var explosion_scene: PackedScene
 @export var explosion_distance: float = 150.0
+@export var player_stats: PlayerStats # <-- Ссылка на данные
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bite: AudioStreamPlayer2D = $bite
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var hitbox: Area2D = $WeaponPivot/Hitbox
 @onready var sword_sprite: Sprite2D = $WeaponPivot/SwordSprite
 @export var weapon_orbit_radius: float = 35.0
+
 const SPEED = 300.0
 const ATTACK_TIME = 0.3
+
 var last_direction : Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
-var health: int = 100
 var hit_targets: Array[Node2D] = []
 
 func _ready() -> void:
 	hitbox.monitoring = false
+	
+	# Если Main не успел передать статы, ищем их сами через группу
+	if not player_stats:
+		var stats_nodes = get_tree().get_nodes_in_group("player_stats")
+		if stats_nodes.size() > 0:
+			player_stats = stats_nodes[0]
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("attack") and not is_attacking:
@@ -54,17 +64,12 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 
 func rotate_weapon_to_mouse() -> void:
 	var mouse_pos = get_global_mouse_position()
-
-	# Направление от персонажа к мышке
 	var direction = to_local(mouse_pos)
 
 	if direction.length_squared() == 0:
 		return
 
-	# Перемещаем рукоять по орбите
 	weapon_pivot.position = direction.normalized() * weapon_orbit_radius
-
-	# Направляем меч на мышку
 	weapon_pivot.rotation = direction.angle()
 
 func attack() -> void:
@@ -76,7 +81,6 @@ func attack() -> void:
 	rotate_weapon_to_mouse()
 
 	var base_angle = weapon_pivot.rotation
-
 	hitbox.monitoring = true
 
 	var tween = create_tween()
@@ -86,48 +90,42 @@ func attack() -> void:
 
 	await tween.finished
 
-	# Взрыв в момент завершения удара мечом
 	create_ground_explosion()
 
 	hitbox.monitoring = false
 	is_attacking = false
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if not is_attacking:
-		return
-
-	if not body.is_in_group("enemy"):
-		return
-
-	if body in hit_targets:
-		return
-
-	if not body.has_method("take_damage"):
-		return
+	if not is_attacking: return
+	if not body.is_in_group("enemy"): return
+	if body in hit_targets: return
+	if not body.has_method("take_damage"): return
 
 	hit_targets.append(body)
 	body.take_damage(10)
 		
 func die() -> void:
 	print("Player died!")
-
 	velocity = Vector2.ZERO
 	set_physics_process(false)
-
 	animated_sprite_2d.play("death")
 	
 func take_damage(amount: int) -> void:
-	health -= amount
-	if health <= 0:
+	# Защита от вызова урона до того, как данные передались
+	if not player_stats or not player_stats.stats:
+		return
+		
+	# Уменьшаем здоровье в ресурсе (сеттер сам вызовет сигнал health_changed)
+	player_stats.stats.current_health -= amount
+	
+	if player_stats.stats.current_health <= 0:
 		die()
 		
 func create_ground_explosion() -> void:
-	if explosion_scene == null:
-		return
+	if explosion_scene == null: return
 		
 	var explosion = explosion_scene.instantiate()
 	get_tree().current_scene.add_child(explosion)
 	
 	var direction = weapon_pivot.position.normalized()
 	explosion.global_position = global_position + direction * explosion_distance
-	

@@ -420,8 +420,6 @@ metadata/_edit_group_ = true
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=889414562]
 scale = Vector2(1.0037293, 1.0229774)
-collision_layer = 0
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=874465812]
 position = Vector2(9, -0.9962211)

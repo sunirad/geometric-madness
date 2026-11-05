@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://gp80xyyq32l1"]
+
+[ext_resource type="Script" uid="uid://bkqeeuh6d65sj" path="res://scripts/character_list/character_sheet_ui.gd" id="1_y8tpc"]
+[ext_resource type="Texture2D" uid="uid://dihd1yyuuky4n" path="res://assets/img/player/ViralEmoji - 54.png" id="2_0ssaj"]
+
+[node name="CharacterSheetUI" type="CanvasLayer" unique_id=844527856 node_paths=PackedStringArray("portrait_texture", "title_label", "level_label", "hp_bar", "mp_bar", "hp_label", "mp_label", "str_value_label", "str_bonus_label", "agi_value_label", "agi_bonus_label", "int_value_label", "int_bonus_label")]
+process_mode = 3
+script = ExtResource("1_y8tpc")
+portrait_texture = NodePath("Root/VBox/ContentHBox/PortraitFrame/Portrait")
+title_label = NodePath("Root/VBox/TitleLabel")
+level_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/LevelPanel/LevelMargin/LevelLabel")
+hp_bar = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox/HPBar")
+mp_bar = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox/MPBar")
+hp_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox/HPLable")
+mp_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox/MPLabel")
+str_value_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/StrRow/StrValue")
+str_bonus_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/StrRow/StrBonus")
+agi_value_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/AgiRow/AgiValue")
+agi_bonus_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/AgiRow/AgiBonus")
+int_value_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/IntRow/IntValue")
+int_bonus_label = NodePath("Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/IntRow/IntBonus")
+
+[node name="Root" type="Control" parent="." unique_id=1805586553]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="Root" unique_id=795836819]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 256.0
+offset_bottom = 411.0
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="Root/VBox" unique_id=5816998]
+layout_mode = 2
+text = "CHARACTER"
+
+[node name="ContentHBox" type="HBoxContainer" parent="Root/VBox" unique_id=1531118143]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PortraitFrame" type="PanelContainer" parent="Root/VBox/ContentHBox" unique_id=141307060]
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="Root/VBox/ContentHBox/PortraitFrame" unique_id=14627431]
+custom_minimum_size = Vector2(240, 360)
+layout_mode = 2
+texture = ExtResource("2_0ssaj")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="InfoVBox" type="VBoxContainer" parent="Root/VBox/ContentHBox/PortraitFrame" unique_id=187505904]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 12
+
+[node name="LevelPanel" type="PanelContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox" unique_id=1121675121]
+layout_mode = 2
+
+[node name="LevelMargin" type="MarginContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/LevelPanel" unique_id=627568377]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="LevelLabel" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/LevelPanel/LevelMargin" unique_id=470640988]
+layout_mode = 2
+text = "Level 1"
+
+[node name="VitalsPanel" type="PanelContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox" unique_id=597590790]
+layout_mode = 2
+
+[node name="VitalsMargin" type="MarginContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel" unique_id=476529232]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VitalsBox" type="VBoxContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin" unique_id=718531490]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HPLable" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox" unique_id=875623822]
+layout_mode = 2
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox" unique_id=1673683143]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="MPLabel" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox" unique_id=1321356041]
+layout_mode = 2
+text = "MP"
+
+[node name="MPBar" type="ProgressBar" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/VitalsPanel/VitalsMargin/VitalsBox" unique_id=1503286960]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="StatsPanel" type="PanelContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox" unique_id=61722475]
+layout_mode = 2
+
+[node name="StatsMargin" type="MarginContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel" unique_id=158129425]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="StatsVBox" type="VBoxContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin" unique_id=569863059]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StrRow" type="HBoxContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox" unique_id=2084896744]
+layout_mode = 2
+
+[node name="StrName" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/StrRow" unique_id=373135181]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "STR"
+
+[node name="StrValue" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/StrRow" unique_id=244527100]
+layout_mode = 2
+text = "10"
+
+[node name="StrBonus" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/StrRow" unique_id=115733197]
+layout_mode = 2
+text = "(+0)"
+
+[node name="AgiRow" type="HBoxContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox" unique_id=2010308461]
+layout_mode = 2
+
+[node name="AgiName" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/AgiRow" unique_id=381986866]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "AGI"
+
+[node name="AgiValue" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/AgiRow" unique_id=1139211253]
+layout_mode = 2
+text = "10"
+
+[node name="AgiBonus" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/AgiRow" unique_id=428592182]
+layout_mode = 2
+text = "(+0)"
+
+[node name="IntRow" type="HBoxContainer" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox" unique_id=762794558]
+layout_mode = 2
+
+[node name="intName" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/IntRow" unique_id=1569581107]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "INT"
+
+[node name="IntValue" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/IntRow" unique_id=1443797021]
+layout_mode = 2
+text = "10"
+
+[node name="IntBonus" type="Label" parent="Root/VBox/ContentHBox/PortraitFrame/InfoVBox/StatsPanel/StatsMargin/StatsVBox/IntRow" unique_id=616729148]
+layout_mode = 2
+text = "(+0)"

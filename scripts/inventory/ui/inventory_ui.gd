@@ -1,5 +1,11 @@
 extends CanvasLayer
 
+# ============================================================
+# UI Инвентаря.
+# Открывается/закрывается по клавише инвентаря.
+# Пауза управляется через PauseManager.
+# ============================================================
+
 @onready var root: Control = $Root
 @onready var eq_ui = $Root/RightPanel/VBox/EquipmentArea
 @onready var bp_ui = $Root/RightPanel/VBox/BackpackArea
@@ -9,10 +15,12 @@ var dragged_item: EquipItemData = null
 var _drag_canvas: Control = null
 
 func _ready() -> void:
+	# Всегда обрабатываем ввод, даже на паузе
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	root.visible = false
 	_is_open = false
 	
+	# Создаем полноэкранный слой для отрисовки перетаскиваемого предмета
 	_drag_canvas = Control.new()
 	_drag_canvas.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_drag_canvas.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -22,6 +30,8 @@ func _ready() -> void:
 	set_process(true)
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Обрабатываем только клавишу открытия/закрытия инвентаря.
+	# Esc обрабатывается глобально в PauseManager.
 	if event.is_action_pressed("inventory"):
 		toggle()
 		get_viewport().set_input_as_handled()
@@ -34,15 +44,18 @@ func open() -> void:
 	if _is_open: return
 	_is_open = true
 	root.visible = true
-	get_tree().paused = true
+	PauseManager.register_open()
 
 func close() -> void:
 	if not _is_open: return
 	_is_open = false
 	root.visible = false
-	get_tree().paused = false
+	PauseManager.register_close()
 	if dragged_item != null:
 		stop_drag()
+
+func is_open() -> bool:
+	return _is_open
 
 func setup_inventory(p_equipment: Equipment, p_backpack: BackpackGrid) -> void:
 	if eq_ui:
