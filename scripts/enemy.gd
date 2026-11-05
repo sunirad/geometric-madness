@@ -147,8 +147,15 @@ func take_damage(amount: int) -> void:
 	if is_dead:
 		return
 
+	print("--------------------------------")
+	print("ENEMY: ", name)
+	print("DAMAGE RECEIVED: ", amount)
+	print("HP BEFORE: ", health)
+	print("HP AFTER: ", health - amount)
+	print("TIME: ", Time.get_ticks_msec())
+	print("--------------------------------")
+
 	health -= amount
-	print("Enemy HP: ", health, "/", max_health)
 
 	if health <= 0:
 		die()

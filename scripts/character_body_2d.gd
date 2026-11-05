@@ -15,7 +15,6 @@ var health: int = 100
 var hit_targets: Array[Node2D] = []
 
 func _ready() -> void:
-	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	hitbox.monitoring = false
 
 func _physics_process(_delta: float) -> void:

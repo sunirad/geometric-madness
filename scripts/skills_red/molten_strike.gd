@@ -6,6 +6,7 @@ extends Area2D
 @export var spread_radius: float = 80.0
 
 var hit_targets: Array[Node2D] = []
+var explosion_finished: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -21,10 +22,18 @@ func _ready() -> void:
 		damage_enemy(body)
 
 	await get_tree().create_timer(0.25).timeout
+
 	spawn_small_explosions()
+
+	# После первичного удара больше не принимаем новых целей
+	explosion_finished = true
+	monitoring = false
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if explosion_finished:
+		return
+
 	damage_enemy(body)
 
 
@@ -42,9 +51,6 @@ func damage_enemy(body: Node2D) -> void:
 	body.take_damage(damage)
 
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	queue_free()
-	
 func spawn_small_explosions() -> void:
 	if small_explosion_scene == null:
 		return
@@ -58,3 +64,7 @@ func spawn_small_explosions() -> void:
 
 		get_tree().current_scene.add_child(small_explosion)
 		small_explosion.global_position = global_position + offset
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	queue_free()
