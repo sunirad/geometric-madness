@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="OneHandData" format=3 uid="uid://bl3ebxr4u33sk"]
+
+[ext_resource type="Texture2D" uid="uid://cy73ba6og6kdc" path="res://assets/img/weapon/Sword.png" id="1_1hpxg"]
+[ext_resource type="Script" uid="uid://bctwenkbga4te" path="res://scripts/inventory/equipment/one_hand_data.gd" id="1_tse6l"]
+
+[resource]
+script = ExtResource("1_tse6l")
+icon = ExtResource("1_1hpxg")
+metadata/_custom_type_script = "uid://bctwenkbga4te"

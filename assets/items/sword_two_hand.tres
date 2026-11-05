@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TwoHandData" format=3 uid="uid://bamw2b14qfv64"]
+
+[ext_resource type="Script" uid="uid://dj4a54k3q1cg7" path="res://scripts/inventory/equipment/two_hand_data.gd" id="1_3hdij"]
+[ext_resource type="Texture2D" uid="uid://b5lyk2mdw6hh2" path="res://assets/img/weapon/geometric_sword.png" id="1_167ng"]
+
+[resource]
+script = ExtResource("1_3hdij")
+icon = ExtResource("1_167ng")
+metadata/_custom_type_script = "uid://dj4a54k3q1cg7"

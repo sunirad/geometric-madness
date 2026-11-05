@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://b1wtwscruq4us"]
+
+[ext_resource type="PackedScene" uid="uid://d4hacwni2l3un" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dqipl4c5hc0se" path="res://scenes/inventory/inventory_ui.tscn" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://dcltfc4kvwnq4" path="res://scenes/enemy.tscn" id="3_jyhfs"]
+[ext_resource type="Resource" uid="uid://bl3ebxr4u33sk" path="res://assets/items/sword_iron.tres" id="3_tipki"]
+[ext_resource type="Resource" uid="uid://bamw2b14qfv64" path="res://assets/items/sword_two_hand.tres" id="4_85g3d"]
+[ext_resource type="Script" uid="uid://dmxy6bu872oqe" path="res://scripts/inventory/inventory_manager.gd" id="4_jyhfs"]
+[ext_resource type="Resource" uid="uid://cj0kmo8n2awxh" path="res://assets/items/ring_gold.tres" id="5_choun"]
+[ext_resource type="Resource" uid="uid://bfo3s2dnrh65j" path="res://assets/items/helmet_iron.tres" id="6_ya4ey"]
+
+[node name="main" type="Node2D" unique_id=1608710082]
+
+[node name="InventoryUi" parent="." unique_id=1382271037 instance=ExtResource("1_sugp2")]
+
+[node name="InventoryManager" type="Node" parent="." unique_id=731406284]
+script = ExtResource("4_jyhfs")
+start_sword = ExtResource("3_tipki")
+start_two_hand = ExtResource("4_85g3d")
+start_ring = ExtResource("5_choun")
+start_helmet = ExtResource("6_ya4ey")
+
+[node name="player" parent="." unique_id=1977552922 instance=ExtResource("1_o5qli")]
+position = Vector2(564, 332)
+collision_mask = 3
+
+[node name="enemy" parent="." unique_id=1696243300 instance=ExtResource("3_jyhfs")]
+position = Vector2(367.00003, 117)
+scale = Vector2(1.8487616, 1.8236352)
+
+[node name="enemy2" parent="." unique_id=1183982198 instance=ExtResource("3_jyhfs")]
+position = Vector2(117, 226)
+
+[node name="enemy3" parent="." unique_id=1635611102 instance=ExtResource("3_jyhfs")]
+position = Vector2(190, 388)
+
+[node name="enemy4" parent="." unique_id=1896597725 instance=ExtResource("3_jyhfs")]
+position = Vector2(377, 424)
