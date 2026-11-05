@@ -120,7 +120,8 @@ script = ExtResource("1_0qkqa")
 small_explosion_scene = ExtResource("2_jgwh8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1558021059]
-scale = Vector2(0.5123497, 0.51408327)
+position = Vector2(1.9073486e-06, -1.000001)
+scale = Vector2(0.44367486, 0.4289166)
 sprite_frames = SubResource("SpriteFrames_sbfll")
 animation = &"molten_strike"
 
