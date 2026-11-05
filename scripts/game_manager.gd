@@ -1,0 +1,83 @@
+extends Node
+
+@export var enemy_scene: PackedScene
+
+@export var initial_enemy_count: int = 5
+@export var respawn_delay: float = 1.5
+
+@export var target_kills: int = 100
+
+@export var min_enemy_scale: float = 0.8
+@export var max_enemy_scale: float = 1.5
+
+@onready var enemies_container: Node2D = $"../Enemies"
+@onready var spawn_points: Node2D = $"../SpawnPoints"
+@onready var win_screen: CanvasGroup = $"../WinScreen"
+
+var kills: int = 0
+var game_won: bool = false
+
+
+func _ready() -> void:
+	win_screen.hide()
+
+	for i in range(initial_enemy_count):
+		spawn_enemy()
+
+
+func spawn_enemy() -> void:
+	if game_won:
+		return
+
+	if enemy_scene == null:
+		push_error("Enemy Scene не назначена!")
+		return
+
+	var points = spawn_points.get_children()
+
+	if points.is_empty():
+		push_error("Нет точек появления врагов!")
+		return
+
+	var spawn_point = points.pick_random()
+
+	var enemy = enemy_scene.instantiate()
+
+	var random_scale = randf_range(
+		min_enemy_scale,
+		max_enemy_scale
+	)
+
+	enemy.scale = Vector2.ONE * random_scale
+
+	enemies_container.add_child(enemy)
+
+	enemy.global_position = spawn_point.global_position
+
+	enemy.died.connect(_on_enemy_died)
+
+
+func _on_enemy_died() -> void:
+	if game_won:
+		return
+
+	kills += 1
+
+	print("Убито врагов: ", kills, "/", target_kills)
+
+	if kills >= target_kills:
+		win_game()
+		return
+
+	await get_tree().create_timer(respawn_delay).timeout
+
+	if not game_won:
+		spawn_enemy()
+
+
+func win_game() -> void:
+	game_won = true
+
+	print("YOU WON!")
+
+	win_screen.show()

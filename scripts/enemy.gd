@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+signal died
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_area: Area2D = $AttackArea
@@ -158,23 +158,22 @@ func die() -> void:
 		return
 
 	is_dead = true
-	velocity = Vector2.ZERO
+	died.emit()
 
-	# Отключаем физику и обнаружение
+	velocity = Vector2.ZERO
 	set_physics_process(false)
-	set_process(false)
-	detection_area.set_deferred("monitoring", false)
-	attack_area.set_deferred("monitoring", false)
+
 	$CollisionShape2D.set_deferred("disabled", true)
 
-	 # Проигрываем смерть один раз
-	animated_sprite.play("death")
+	if has_node("DetectionArea"):
+		$DetectionArea.monitoring = false
 
-	# Ждём завершения анимации
+	if has_node("AttackArea"):
+		$AttackArea.monitoring = false
+
+	animated_sprite.play("death")
 	await animated_sprite.animation_finished
 
-	# Оставляем труп на 15 секунд
 	await get_tree().create_timer(15.0).timeout
 
-	# Удаляем врага
 	queue_free()
