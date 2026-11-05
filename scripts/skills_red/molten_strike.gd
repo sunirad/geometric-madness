@@ -41,15 +41,12 @@ func damage_enemy(body: Node2D) -> void:
 	hit_targets.append(body)
 	body.take_damage(damage)
 
-	print("MOLTEN STRIKE HIT: ", body.name)
-
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	queue_free()
 	
 func spawn_small_explosions() -> void:
 	if small_explosion_scene == null:
-		print("ERROR: Small Explosion Scene не назначена!")
 		return
 
 	for i in range(small_explosion_count):
@@ -61,5 +58,3 @@ func spawn_small_explosions() -> void:
 
 		get_tree().current_scene.add_child(small_explosion)
 		small_explosion.global_position = global_position + offset
-
-		print("Создан маленький взрыв №", i + 1)

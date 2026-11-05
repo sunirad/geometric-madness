@@ -19,7 +19,7 @@ func _ready() -> void:
 	hitbox.monitoring = false
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("attack") and not is_attacking:
+	if Input.is_action_pressed("attack") and not is_attacking:
 		attack()
 		
 	process_movement()
@@ -107,8 +107,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		return
 
 	hit_targets.append(body)
-
-	print("SWORD HIT: ", body.name)
 	body.take_damage(10)
 		
 func die() -> void:
@@ -121,17 +119,16 @@ func die() -> void:
 	
 func take_damage(amount: int) -> void:
 	health -= amount
-	print("Player health: ", health)
-
 	if health <= 0:
 		die()
+		
 func create_ground_explosion() -> void:
 	if explosion_scene == null:
 		return
-
+		
 	var explosion = explosion_scene.instantiate()
 	get_tree().current_scene.add_child(explosion)
-
+	
 	var direction = weapon_pivot.position.normalized()
 	explosion.global_position = global_position + direction * explosion_distance
 	

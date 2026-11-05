@@ -72,14 +72,10 @@ func _physics_process(_delta: float) -> void:
 		velocity = Vector2.ZERO
 		animated_sprite.play("idle")
 		
-	print("Distance: ", distance)
-	print("In attack range: ", distance <= ATTACK_RANGE)
-	print("Can attack (cooldown): ", can_attack)
 	move_and_slide()
 
 
 func attack() -> void:
-	print("ENEMY ATTACK!")
 	if is_attacking or not can_attack:
 		return
 
@@ -133,12 +129,9 @@ func attack() -> void:
 
 
 func _on_detection_body_entered(body: Node2D) -> void:
-	print("Обнаружен объект: ", body.name)
-
 	if body.is_in_group("player"):
 		player = body
 		current_state = State.CHASE
-		print("ИГРОК ОБНАРУЖЕН!")
 
 
 func _on_detection_body_exited(body: Node2D) -> void:

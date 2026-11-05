@@ -18,9 +18,12 @@ scale = Vector2(1.8487616, 1.8236352)
 
 [node name="enemy2" parent="." unique_id=1183982198 instance=ExtResource("3_jyhfs")]
 position = Vector2(117, 226)
+scale = Vector2(1.9021573, 1.8521912)
 
 [node name="enemy3" parent="." unique_id=1635611102 instance=ExtResource("3_jyhfs")]
 position = Vector2(190, 388)
+scale = Vector2(1.9146359, 1.8165826)
 
 [node name="enemy4" parent="." unique_id=1896597725 instance=ExtResource("3_jyhfs")]
 position = Vector2(377, 424)
+scale = Vector2(1.8151221, 1.7209826)

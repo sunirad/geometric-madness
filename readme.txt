@@ -5,7 +5,7 @@
 
 Загрузка изменений в репозиторий: 
     git status
-    git add.
+    git add .
     git commit -m "что было сделано типа в этом пул реквесте я пососал яйца"
     git push origin 
 
