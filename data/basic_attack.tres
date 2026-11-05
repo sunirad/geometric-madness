@@ -7,4 +7,6 @@
 script = ExtResource("1_owbmm")
 icon = ExtResource("1_e55ui")
 description = "Deals 10 damage"
+damage = 10
+support_slots_count = 3
 metadata/_custom_type_script = "uid://bb2npinnkfaft"

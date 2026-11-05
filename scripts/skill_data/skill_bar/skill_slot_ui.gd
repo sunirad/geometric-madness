@@ -15,6 +15,17 @@ func _ready() -> void:
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	# Задаем темный фон прямо из кода
+	background.color = Color(0.1, 0.1, 0.1, 0.8)
+	
+	# Подключаем отрисовку рамки
+	background.draw.connect(_draw_border)
+
+# Рисуем белую рамку поверх фона
+func _draw_border() -> void:
+	var rect = background.get_rect()
+	background.draw_rect(rect, Color(0.7, 0.7, 0.7), false, 2.0)
 
 func set_key_text(text: String) -> void:
 	key_label.text = text

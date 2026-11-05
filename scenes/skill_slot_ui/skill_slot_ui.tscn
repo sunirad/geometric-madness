@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://87lk1s8dfh3o"]
 
-[ext_resource type="Script" uid="uid://l3eh4hn0uoxr" path="res://scripts/skill_data/skill_slot_ui.gd" id="1_trlsq"]
+[ext_resource type="Script" uid="uid://l3eh4hn0uoxr" path="res://scripts/skill_data/skill_bar/skill_slot_ui.gd" id="1_trlsq"]
 
 [node name="SkillSlotUI" type="Control" unique_id=266401646]
 custom_minimum_size = Vector2(64, 64)
@@ -18,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3491902, 0.3491902, 0.3491902, 0.8)
+color = Color(0.735357, 0.735357, 0.735357, 1)
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1334573716]
 layout_mode = 1

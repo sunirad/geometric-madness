@@ -1,5 +1,5 @@
 class_name SkillPicker
-extends Control # <-- ТЕПЕРЬ ЭТО ПРОСТО CONTROL
+extends Control
 
 signal skill_selected(skill: SkillData)
 signal clear_requested()
@@ -7,51 +7,48 @@ signal clear_requested()
 var _target_slot: SkillSlotUI = null
 var _available_skills: Array[SkillData] = []
 var _hbox: HBoxContainer
+var skill_book: SkillBookData # <-- Ссылка на книгу скиллов
 
 func _ready() -> void:
-	visible = false # Скрываем при старте
+	visible = false
 	size = Vector2i(132, 64)
 	
-	# Создаем контейнер для иконок
 	_hbox = HBoxContainer.new()
 	_hbox.add_theme_constant_override("separation", 4)
 	add_child(_hbox)
-	
-	# Загружаем базовую атаку
-	var basic_attack = load("res://data/basic_attack.tres")
-	if basic_attack:
-		_available_skills.append(basic_attack)
+
+# Метод для передачи книги скиллов из панели
+func setup_book(book: SkillBookData) -> void:
+	skill_book = book
+	if skill_book:
+		_available_skills = skill_book.skills
+		print("SkillPicker: Загружено скиллов из книги: ", _available_skills.size())
 
 func open_for_slot(slot: SkillSlotUI) -> void:
 	_target_slot = slot
 	_refresh_ui()
 	
-	# Размер меню
 	size = Vector2i(132, 64)
 	
 	var top_row = get_parent().get_node("VBox/TopRow")
 	
 	if top_row and top_row.get_child_count() >= 3:
-		# Берем MMB (третий слот)
-		var right_slot = top_row.get_child(2)
+		var right_slot = top_row.get_child(2) # MMB (третий слот)
 		var right_rect = right_slot.get_global_rect()
 		
-		# Вычисляем точку: правый край MMB минус ширина меню
-		var spawn_x = right_rect.end.x - size.x
-		var spawn_y = right_rect.position.y - size.y - 10
+		var spawn_pos = Vector2i(
+			int(right_rect.end.x - size.x), 
+			int(right_rect.position.y - size.y - 10)
+		)
 		
-		# Жестко задаем позицию
-		global_position = Vector2(spawn_x, spawn_y)
+		global_position = Vector2(spawn_pos)
 		
-	# Показываем меню
 	visible = true
 
 func _refresh_ui() -> void:
-	# Очищаем старые кнопки
 	for child in _hbox.get_children():
 		child.queue_free()
 		
-	# 1. Добавляем скиллы
 	for skill in _available_skills:
 		var panel = Panel.new()
 		panel.custom_minimum_size = Vector2(64, 64)
@@ -80,7 +77,6 @@ func _refresh_ui() -> void:
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		panel.add_child(icon)
 		
-	# 2. Добавляем крестик
 	var clear_panel = Panel.new()
 	clear_panel.custom_minimum_size = Vector2(64, 64)
 	_hbox.add_child(clear_panel)
@@ -107,9 +103,9 @@ func _refresh_ui() -> void:
 func _on_skill_panel_input(event: InputEvent, skill: SkillData) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		skill_selected.emit(skill)
-		visible = false # Вместо hide()
+		visible = false
 
 func _on_clear_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		clear_requested.emit()
-		visible = false # Вместо hide()
+		visible = false

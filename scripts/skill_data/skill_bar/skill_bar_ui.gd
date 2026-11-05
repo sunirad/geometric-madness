@@ -7,9 +7,8 @@ extends Control
 
 var config: SkillBarConfig
 var _slots: Array[SkillSlotUI] = []
-var _player_ref: CharacterBody2D = null # Ссылка на игрока
+var _player_ref: CharacterBody2D = null
 
-# ВАЖНО: поменяли местами MouseRight и MouseMiddle
 var _slot_actions: Array[String] = [
 	"MouseLeft", "MouseMiddle", "MouseRight",
 	"Key1", "Key2", "Key3", "Key4", "Key5"
@@ -20,13 +19,17 @@ var _slot_labels: Array[String] = [
 ]
 
 func _ready() -> void:
-	# Ищем игрока по группе (он добавляется в группу в _enter_tree)
 	_player_ref = get_tree().get_first_node_in_group("player")
 	
 	if not config:
 		config = load("res://data/skill_bar_config.tres")
 		if not config:
 			push_warning("SkillBarUI: Не удалось загрузить skill_bar_config.tres!")
+	
+	# Загружаем книгу скиллов и передаем её в меню выбора
+	var book = load("res://data/skill_book_data.tres")
+	if skill_picker and book:
+		skill_picker.setup_book(book)
 	
 	# Ставим базовую атаку на ЛКМ по умолчанию
 	if config and config.get_skill("MouseLeft") == null:
@@ -56,16 +59,13 @@ func _ready() -> void:
 		
 	refresh_slots()
 
-# Закрытие меню при клике мимо него
 func _input(event: InputEvent) -> void:
 	if skill_picker and skill_picker.visible:
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			if not skill_picker.get_global_rect().has_point(event.position):
 				skill_picker.visible = false
 
-# Перехват нажатия кнопок для активации скиллов
 func _unhandled_input(event: InputEvent) -> void:
-	# Не реагируем, если меню открыто (чтобы не активировать скилл при выборе)
 	if skill_picker and skill_picker.visible:
 		return
 		
@@ -86,10 +86,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if action_name != "" and config:
 		var skill = config.get_skill(action_name)
 		if skill != null:
-			# Если это базовая атака, вызываем метод у игрока
 			if skill.id == "basic_attack" and is_instance_valid(_player_ref):
 				if _player_ref.has_method("attack"):
-					_player_ref.attack()
+					_player_ref.attack(skill) # <-- Передаем скилл для урона
 
 func refresh_slots() -> void:
 	if not config: return

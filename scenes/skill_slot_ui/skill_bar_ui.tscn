@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cxpnrrmi1fq35"]
 
 [ext_resource type="PackedScene" uid="uid://87lk1s8dfh3o" path="res://scenes/skill_slot_ui/skill_slot_ui.tscn" id="1_ilxfe"]
-[ext_resource type="Script" uid="uid://bs0xlcgrobeee" path="res://scripts/skill_data/skill_bar_ui.gd" id="1_se5xg"]
-[ext_resource type="Script" uid="uid://dnny8se7m12ha" path="res://scripts/skill_data/skill_picker.gd" id="4_rwvkj"]
+[ext_resource type="Script" uid="uid://bs0xlcgrobeee" path="res://scripts/skill_data/skill_bar/skill_bar_ui.gd" id="1_se5xg"]
+[ext_resource type="Script" uid="uid://dnny8se7m12ha" path="res://scripts/skill_data/skill_bar/skill_picker.gd" id="4_rwvkj"]
 
 [node name="SkillBarUI" type="Control" unique_id=647271601]
 layout_mode = 3

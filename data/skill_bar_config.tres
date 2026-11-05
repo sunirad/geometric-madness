@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SkillBarConfig" format=3 uid="uid://dcsbbu3hnc3p3"]
 
-[ext_resource type="Script" uid="uid://b2u35yj61xgcr" path="res://scripts/skill_data/skill_bar_config.gd" id="1_u8ewr"]
+[ext_resource type="Script" uid="uid://b2u35yj61xgcr" path="res://scripts/skill_data/skill_bar/skill_bar_config.gd" id="1_u8ewr"]
 
 [resource]
 script = ExtResource("1_u8ewr")

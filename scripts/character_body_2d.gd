@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var explosion_scene: PackedScene
 @export var explosion_distance: float = 150.0
-@export var player_stats: PlayerStats # <-- Ссылка на данные
+@export var player_stats: PlayerStats
 @export var weapon_orbit_radius: float = 35.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -17,24 +17,23 @@ const ATTACK_TIME = 0.3
 var last_direction : Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var hit_targets: Array[Node2D] = []
+var _attack_tween: Tween = null
+var _current_skill: SkillData = null # <-- Храним скилл, которым бьем
 
 func _enter_tree() -> void:
-	# Добавляемся в группу, чтобы панель скиллов могла нас найти
 	add_to_group("player")
 
 func _ready() -> void:
 	hitbox.monitoring = false
-	
-	# Если Main не успел передать статы, ищем их сами через группу
 	if not player_stats:
 		var stats_nodes = get_tree().get_nodes_in_group("player_stats")
 		if stats_nodes.size() > 0:
 			player_stats = stats_nodes[0]
 
 func _physics_process(_delta: float) -> void:
-	# УБРАЛИ строку if Input.is_action_pressed("attack")...
-	# Теперь атака управляется через панель скиллов
-	
+	if get_tree().paused:
+		return
+		
 	process_movement()
 	process_animation()
 	
@@ -76,11 +75,15 @@ func rotate_weapon_to_mouse() -> void:
 	weapon_pivot.position = direction.normalized() * weapon_orbit_radius
 	weapon_pivot.rotation = direction.angle()
 
-# ВАЖНО: убираем await tween.finished, чтобы атака не блокировала физику
-func attack() -> void:
+# Добавили параметр skill_data
+func attack(skill_data: SkillData = null) -> void:
+	if get_tree().paused:
+		return
 	if is_attacking:
-		return # Защита от спама
+		return
 		
+	_current_skill = skill_data # Запоминаем, каким скиллом бьем
+	
 	hit_targets.clear()
 	is_attacking = true
 	bite.play()
@@ -91,18 +94,17 @@ func attack() -> void:
 	var base_angle = weapon_pivot.rotation
 	hitbox.monitoring = true
 
-	var tween = create_tween()
-	tween.tween_property(weapon_pivot, "rotation", base_angle - 1.04, 0.05)
-	tween.tween_property(weapon_pivot, "rotation", base_angle + 1.04, 0.1)
-	tween.tween_property(weapon_pivot, "rotation", base_angle, 0.15)
+	_attack_tween = create_tween()
+	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle - 1.04, 0.05)
+	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle + 1.04, 0.1)
+	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle, 0.15)
 
-	# Ждем завершения анимации через таймер, не блокируя код
-	await get_tree().create_timer(0.3).timeout
-
-	create_ground_explosion()
-
-	hitbox.monitoring = false
-	is_attacking = false
+	await get_tree().create_timer(0.3, false).timeout
+	
+	if not get_tree().paused:
+		create_ground_explosion()
+		hitbox.monitoring = false
+		is_attacking = false
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if not is_attacking: return
@@ -111,7 +113,13 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if not body.has_method("take_damage"): return
 
 	hit_targets.append(body)
-	body.take_damage(10)
+	
+	# Берем урон из текущего скилла
+	var damage = 0
+	if _current_skill:
+		damage = _current_skill.damage
+		
+	body.take_damage(damage)
 		
 func die() -> void:
 	print("Player died!")
@@ -120,21 +128,15 @@ func die() -> void:
 	animated_sprite_2d.play("death")
 	
 func take_damage(amount: int) -> void:
-	# Защита от вызова урона до того, как данные передались
 	if not player_stats or not player_stats.stats:
 		return
-		
-	# Уменьшаем здоровье в ресурсе (сеттер сам вызовет сигнал health_changed)
 	player_stats.stats.current_health -= amount
-	
 	if player_stats.stats.current_health <= 0:
 		die()
 		
 func create_ground_explosion() -> void:
 	if explosion_scene == null: return
-		
 	var explosion = explosion_scene.instantiate()
 	get_tree().current_scene.add_child(explosion)
-	
 	var direction = weapon_pivot.position.normalized()
 	explosion.global_position = global_position + direction * explosion_distance

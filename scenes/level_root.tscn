@@ -892,18 +892,6 @@ collision_mask = 3
 
 [node name="Enemies" type="Node2D" parent="." unique_id=635072631]
 
-[node name="enemy" parent="Enemies" unique_id=1696243300 instance=ExtResource("5_cseeo")]
-position = Vector2(1051, 530)
-scale = Vector2(3.2025218, 3.3484204)
-
-[node name="enemy2" parent="Enemies" unique_id=1480607277 instance=ExtResource("5_cseeo")]
-position = Vector2(1090, 775)
-scale = Vector2(3.3948379, 3.3829434)
-
-[node name="enemy3" parent="Enemies" unique_id=1146496518 instance=ExtResource("5_cseeo")]
-position = Vector2(1076, 245)
-scale = Vector2(2.8965752, 2.9500675)
-
 [node name="enemy4" parent="Enemies" unique_id=1727483846 instance=ExtResource("5_cseeo")]
 position = Vector2(367.00003, 117)
 scale = Vector2(1.8487616, 1.8236352)

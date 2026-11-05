@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HelmetData" format=3 uid="uid://bfo3s2dnrh65j"]
 
 [ext_resource type="Script" uid="uid://cwuxik2dby0w2" path="res://scripts/inventory/equipment/helmet_data.gd" id="1_1qrji"]
-[ext_resource type="Texture2D" uid="uid://cd3q6hdbdsk1h" path="res://assets/img/helmets/icon_111.png" id="1_bn10h"]
+[ext_resource type="Texture2D" uid="uid://cqavnljevgvj4" path="res://assets/img/items/helmet/icon_111.png" id="1_bn10h"]
 
 [resource]
 script = ExtResource("1_1qrji")

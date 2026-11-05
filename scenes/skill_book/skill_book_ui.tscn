@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c2gqyq3lbvb6l"]
+
+[ext_resource type="Script" uid="uid://b17r7u4xkn0w3" path="res://scripts/skill_data/skill_book/skill_book_ui.gd" id="1_3hy5o"]
+[ext_resource type="Resource" uid="uid://cw7u3fwv6nvip" path="res://data/skill_book_data.tres" id="2_3705d"]
+[ext_resource type="PackedScene" uid="uid://bqxu715f825pk" path="res://scenes/skill_book/skill_card_ui.tscn" id="3_uccdh"]
+
+[node name="SkillBookUI" type="CanvasLayer" unique_id=1639682860]
+process_mode = 3
+script = ExtResource("1_3hy5o")
+skill_book_data = ExtResource("2_3705d")
+skill_card_scene = ExtResource("3_uccdh")
+
+[node name="Root" type="Control" parent="." unique_id=1946080754]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LeftPanel" type="PanelContainer" parent="Root" unique_id=1625677623]
+layout_mode = 0
+offset_right = 670.0
+offset_bottom = 1080.0
+
+[node name="Margin" type="MarginContainer" parent="Root/LeftPanel" unique_id=1622153220]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="Root/LeftPanel/Margin" unique_id=534094884]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="Root/LeftPanel/Margin/VBox" unique_id=403986205]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Root/LeftPanel/Margin/VBox" unique_id=699757614]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillsList" type="VBoxContainer" parent="Root/LeftPanel/Margin/VBox/ScrollContainer" unique_id=206674302]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8

@@ -14,15 +14,20 @@
 [ext_resource type="PackedScene" uid="uid://b5p01kv4e3psm" path="res://scenes/vitals_orb.tscn" id="11_trceg"]
 [ext_resource type="Script" uid="uid://ykdlvjrtalwy" path="res://scripts/vital_orbs/hud.gd.gd" id="12_trceg"]
 [ext_resource type="PackedScene" uid="uid://cxpnrrmi1fq35" path="res://scenes/skill_slot_ui/skill_bar_ui.tscn" id="14_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://c2gqyq3lbvb6l" path="res://scenes/skill_book/skill_book_ui.tscn" id="15_jkv2x"]
 
-[node name="main" type="Node2D" unique_id=1608710082 groups=["main"]]
+[node name="main" type="Node2D" unique_id=1608710082 node_paths=PackedStringArray("player_stats_node") groups=["main"]]
 script = ExtResource("1_ya4ey")
+player_stats_node = NodePath("PlayerStats")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=363095770 node_paths=PackedStringArray("player_stats", "hp_orb", "mp_orb")]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=363095770 node_paths=PackedStringArray("player_stats", "hp_orb", "mp_orb", "hp_text_label", "mp_text_label")]
+layer = 2
 script = ExtResource("12_trceg")
 player_stats = NodePath("../PlayerStats")
 hp_orb = NodePath("RootUI/HpOrb")
 mp_orb = NodePath("RootUI/MpOrb")
+hp_text_label = NodePath("RootUI/HPTextLabel")
+mp_text_label = NodePath("RootUI/MPTextLabel")
 
 [node name="RootUI" type="Control" parent="HUD" unique_id=1310187009]
 layout_mode = 3
@@ -44,6 +49,16 @@ offset_right = 148.0
 offset_bottom = -37.0
 grow_vertical = 0
 
+[node name="HPTextLabel" type="Label" parent="HUD/RootUI" unique_id=713143975]
+layout_mode = 0
+offset_left = 23.955
+offset_top = 881.0
+offset_right = 143.95471
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MpOrb" parent="HUD/RootUI" unique_id=609484248 instance=ExtResource("11_trceg")]
 layout_mode = 1
 anchors_preset = 3
@@ -59,6 +74,16 @@ grow_horizontal = 0
 grow_vertical = 0
 fill_color = Color(0.3491902, 0.58383155, 0.95468724, 1)
 
+[node name="MPTextLabel" type="Label" parent="HUD/RootUI" unique_id=550092811]
+layout_mode = 0
+offset_left = 1749.0
+offset_top = 881.0
+offset_right = 1868.9998
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="InventoryUI" parent="." unique_id=1382271037 groups=["closable_ui"] instance=ExtResource("1_sugp2")]
 
 [node name="InventoryManager" type="Node" parent="." unique_id=731406284]
@@ -68,7 +93,7 @@ start_two_hand = ExtResource("4_85g3d")
 start_ring = ExtResource("5_choun")
 start_helmet = ExtResource("6_ya4ey")
 
-[node name="CharacterSheetUI" parent="." unique_id=844527856 node_paths=PackedStringArray("player_stats") groups=["closable_ui"] instance=ExtResource("7_choun")]
+[node name="CharacterSheetUI" parent="." unique_id=844527856 node_paths=PackedStringArray("player_stats") groups=["character_sheet_ui", "closable_ui"] instance=ExtResource("7_choun")]
 player_stats = NodePath("../PlayerStats")
 
 [node name="PlayerStats" type="Node" parent="." unique_id=1857613223 groups=["player_stats"]]
@@ -76,15 +101,18 @@ script = ExtResource("7_tipki")
 stats = ExtResource("9_choun")
 metadata/_custom_type_script = "uid://b4qqqbmsbrwj"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1109516252]
+[node name="SkillBarUI" type="CanvasLayer" parent="." unique_id=1109516252]
+layer = 2
 
-[node name="SkillBarUI" parent="CanvasLayer" unique_id=647271601 instance=ExtResource("14_a8y0u")]
+[node name="SkillBarUI" parent="SkillBarUI" unique_id=647271601 instance=ExtResource("14_a8y0u")]
 process_mode = 3
 offset_left = 1302.0
 offset_top = 910.0
 offset_right = -198.0
 offset_bottom = -20.0
 mouse_filter = 1
+
+[node name="SkillBookUI" parent="." unique_id=1639682860 groups=["closable_ui", "skill_book_ui"] instance=ExtResource("15_jkv2x")]
 
 [node name="LevelRoot" parent="." unique_id=1887704058 instance=ExtResource("7_85g3d")]
 position = Vector2(2, 0)

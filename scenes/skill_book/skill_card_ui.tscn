@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bqxu715f825pk"]
+
+[ext_resource type="Script" uid="uid://dhk2fuvvu712u" path="res://scripts/skill_data/skill_book/skill_card_ui.gd" id="1_rm0iy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8s5s4"]
+bg_color = Color(0.3491902, 0.3491902, 0.3491902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="SkillCardUi" type="PanelContainer" unique_id=1517076747]
+custom_minimum_size = Vector2(300, 80)
+script = ExtResource("1_rm0iy")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=475012379]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="Margin" unique_id=1608894803]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconFrame" type="PanelContainer" parent="Margin/HBox" unique_id=1023038728]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8s5s4")
+
+[node name="Icon" type="TextureRect" parent="Margin/HBox/IconFrame" unique_id=1319018288]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBox" type="VBoxContainer" parent="Margin/HBox" unique_id=1355922851]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Margin/HBox/VBox" unique_id=1862981591]
+layout_mode = 2
+text = "Skill Name"
+
+[node name="DamageLabel" type="Label" parent="Margin/HBox/VBox" unique_id=1860688]
+layout_mode = 2
+text = "Damage: 0"
+
+[node name="SupportSlots" type="HBoxContainer" parent="Margin/HBox/VBox" unique_id=258541502]
+layout_mode = 2
+theme_override_constants/separation = 4
