@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dchj42bfn33f3" path="res://assets/img/tileset/Top-Down Simple Summer_Ground 05.png" id="1_w3gk0"]
 [ext_resource type="Texture2D" uid="uid://dwcbuipdiqd27" path="res://assets/img/tileset/Top-Down Simple Summer_Ground 29.png" id="2_1vg6f"]
 [ext_resource type="Texture2D" uid="uid://8pkl5ko1p4nq" path="res://assets/img/tileset/Top-Down Simple Summer_Ground 43.png" id="3_ssdv0"]
+[ext_resource type="Texture2D" uid="uid://dao0y1sk7diov" path="res://assets/img/tileset/Top-Down Simple Summer_Prop - Rock 01.png" id="4_cseeo"]
 [ext_resource type="PackedScene" uid="uid://d4hacwni2l3un" path="res://scenes/player.tscn" id="4_ssdv0"]
 [ext_resource type="PackedScene" uid="uid://dcltfc4kvwnq4" path="res://scenes/enemy.tscn" id="5_cseeo"]
 
@@ -783,10 +784,56 @@ texture = ExtResource("3_ssdv0")
 14:15/0 = 0
 15:15/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_advu8"]
+texture = ExtResource("4_cseeo")
+4:3/0 = 0
+0:0/0 = 0
+6:5/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+2:3/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+3:5/0 = 0
+2:5/0 = 0
+1:5/0 = 0
+0:5/0 = 0
+0:4/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+1:4/0 = 0
+6:4/0 = 0
+6:3/0 = 0
+6:2/0 = 0
+6:1/0 = 0
+6:0/0 = 0
+5:0/0 = 0
+4:0/0 = 0
+3:0/0 = 0
+2:0/0 = 0
+1:0/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+2:1/0 = 0
+5:2/0 = 0
+5:3/0 = 0
+5:4/0 = 0
+1:3/0 = 0
+3:3/0 = 0
+3:1/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_wv4m4"]
 sources/0 = SubResource("TileSetAtlasSource_cseeo")
 sources/1 = SubResource("TileSetAtlasSource_arxld")
 sources/2 = SubResource("TileSetAtlasSource_3xth4")
+sources/3 = SubResource("TileSetAtlasSource_advu8")
 
 [node name="LevelRoot" type="Node2D" unique_id=1887704058]
 
