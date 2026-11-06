@@ -1,35 +1,20 @@
 [gd_scene format=3 uid="uid://d4hacwni2l3un"]
 
-[ext_resource type="Texture2D" uid="uid://cj1hqygdeldf2" path="res://assets/img/player/ViralEmoji - 115.png" id="1_dqkch"]
 [ext_resource type="Script" uid="uid://c85j6ka14aj3q" path="res://scripts/character_body_2d.gd" id="1_qlg0r"]
-[ext_resource type="Texture2D" uid="uid://ddtnfg3lqp6rg" path="res://assets/img/player/ViralEmoji - 194.png" id="2_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://v7ym22jkgep3" path="res://scenes/skills_red/molten_strike.tscn" id="2_smehm"]
-[ext_resource type="Texture2D" uid="uid://dihd1yyuuky4n" path="res://assets/img/player/ViralEmoji - 54.png" id="3_tuyoq"]
-[ext_resource type="Texture2D" uid="uid://dg7b6euwvwmta" path="res://assets/img/player/ViralEmoji - 7.png" id="4_fjrip"]
+[ext_resource type="Texture2D" uid="uid://b3aykk5kg7cuj" path="res://assets/img/player/image-removebg-preview (5).png" id="3_smehm"]
 [ext_resource type="AudioStream" uid="uid://x0sso5nshxb0" path="res://assets/audio/crunchy-bite.mp3" id="6_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://cy73ba6og6kdc" path="res://assets/img/weapon/Sword.png" id="7_fjrip"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
-atlas = ExtResource("1_dqkch")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
-atlas = ExtResource("2_qlg0r")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
-atlas = ExtResource("3_tuyoq")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
-atlas = ExtResource("4_fjrip")
-region = Rect2(0, 0, 256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("3_smehm")
+region = Rect2(0, 0, 476, 524)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_smehm")
+"texture": SubResource("AtlasTexture_3v2ag")
 }],
 "loop": 0,
 "name": &"attack",
@@ -37,7 +22,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ur7pv")
+"texture": ExtResource("3_smehm")
 }],
 "loop": 1,
 "name": &"death",
@@ -45,7 +30,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y4r1p")
+"texture": ExtResource("3_smehm")
 }],
 "loop": 1,
 "name": &"idle",
@@ -53,7 +38,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d2wvv")
+"texture": ExtResource("3_smehm")
 }],
 "loop": 1,
 "name": &"move",
@@ -73,12 +58,12 @@ explosion_scene = ExtResource("2_smehm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=392089904]
 texture_filter = 1
-scale = Vector2(0.5, 0.5)
+scale = Vector2(-0.11177082, 0.11368338)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
-animation = &"attack"
-frame_progress = 1.0
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1336613771]
+scale = Vector2(0.9956906, 1)
 shape = SubResource("CircleShape2D_2acnk")
 
 [node name="bite" type="AudioStreamPlayer2D" parent="." unique_id=398383430]
