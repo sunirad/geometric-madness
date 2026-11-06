@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("1_3hdij")
+display_name = "Greatsword"
 icon = ExtResource("1_167ng")
 metadata/_custom_type_script = "uid://dj4a54k3q1cg7"

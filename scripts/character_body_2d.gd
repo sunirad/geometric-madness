@@ -4,9 +4,7 @@ extends CharacterBody2D
 @export var explosion_distance: float = 150.0
 @export var player_stats: PlayerStats
 @export var weapon_orbit_radius: float = 35.0
-
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var bite: AudioStreamPlayer2D = $bite
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var hitbox: Area2D = $WeaponPivot/Hitbox
 @onready var sword_sprite: Sprite2D = $WeaponPivot/SwordSprite
@@ -86,7 +84,6 @@ func attack(skill_data: SkillData = null) -> void:
 	
 	hit_targets.clear()
 	is_attacking = true
-	bite.play()
 	animated_sprite_2d.play("attack")
 
 	rotate_weapon_to_mouse()

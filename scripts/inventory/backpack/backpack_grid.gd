@@ -79,3 +79,16 @@ func _clear_cells(item: EquipItemData) -> void:
 # Возвращает массив всех предметов в рюкзаке.
 func get_all_items() -> Array:
 	return _origins.keys()
+
+func try_add_item(item: EquipItemData) -> bool:
+	if item == null:
+		return false
+
+	for y in range(ROWS):
+		for x in range(COLUMNS):
+			var origin := Vector2i(x, y)
+
+			if can_place(item, origin):
+				return place(item, origin)
+
+	return false

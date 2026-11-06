@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("1_tse6l")
+display_name = "Iron Sword"
 icon = ExtResource("1_1hpxg")
 metadata/_custom_type_script = "uid://bctwenkbga4te"

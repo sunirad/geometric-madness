@@ -1,5 +1,5 @@
 extends CharacterBody2D
-signal died
+signal died(death_positioin: Vector2)
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_area: Area2D = $AttackArea
@@ -157,7 +157,7 @@ func die() -> void:
 		return
 
 	is_dead = true
-	died.emit()
+	died.emit(global_position)
 
 	velocity = Vector2.ZERO
 	set_physics_process(false)

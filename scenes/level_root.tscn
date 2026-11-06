@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://dcltfc4kvwnq4" path="res://scenes/enemy.tscn" id="5_cseeo"]
 [ext_resource type="Script" uid="uid://cjl5csr7avxfm" path="res://scripts/game_manager.gd" id="7_arxld"]
 [ext_resource type="Script" uid="uid://dmj7qbs858lvf" path="res://scripts/win_screen.gd" id="8_3xth4"]
+[ext_resource type="PackedScene" uid="uid://ico0qet2dv4t" path="res://scenes/WorldItem.tscn" id="9_advu8"]
+[ext_resource type="Script" uid="uid://cj4f8puwdnfuj" path="res://scripts/inventory/ui/equip_item_data.gd" id="9_yn2ky"]
+[ext_resource type="Resource" uid="uid://bfo3s2dnrh65j" path="res://assets/items/helmet_iron.tres" id="10_yn2ky"]
+[ext_resource type="Resource" uid="uid://cj0kmo8n2awxh" path="res://assets/items/ring_gold.tres" id="11_a7awj"]
+[ext_resource type="Resource" uid="uid://bl3ebxr4u33sk" path="res://assets/items/sword_iron.tres" id="12_esjri"]
+[ext_resource type="Resource" uid="uid://bamw2b14qfv64" path="res://assets/items/sword_two_hand.tres" id="13_7sqvf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cseeo"]
 texture = ExtResource("1_w3gk0")
@@ -937,6 +943,9 @@ position = Vector2(867, 355)
 [node name="Game manager" type="Node2D" parent="." unique_id=1107427333]
 script = ExtResource("7_arxld")
 enemy_scene = ExtResource("5_cseeo")
+world_item_scene = ExtResource("9_advu8")
+loot_drop_chance = 0.288
+loot_items = Array[ExtResource("9_yn2ky")]([ExtResource("10_yn2ky"), ExtResource("11_a7awj"), ExtResource("12_esjri"), ExtResource("13_7sqvf")])
 
 [node name="WinScreen" type="CanvasGroup" parent="." unique_id=1724895883]
 script = ExtResource("8_3xth4")

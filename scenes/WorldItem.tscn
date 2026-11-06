@@ -1,24 +1,71 @@
 [gd_scene format=3 uid="uid://ico0qet2dv4t"]
 
-[ext_resource type="Texture2D" uid="uid://d2j40uasc5g5g" path="res://assets/img/items/boots/icon_114.png" id="1_iajge"]
-[ext_resource type="Texture2D" uid="uid://cbn7earw4xacb" path="res://assets/img/items/boots/icon_124.png" id="2_tmrcf"]
-[ext_resource type="Texture2D" uid="uid://bjn826btw21js" path="res://assets/img/items/boots/icon_134.png" id="3_mn8cu"]
-[ext_resource type="Texture2D" uid="uid://dv5uwjya7n1bf" path="res://assets/img/items/chest/icon_112.png" id="4_gb2pk"]
+[ext_resource type="Script" uid="uid://bodqub8kpalgu" path="res://scripts/Items/world_item.gd" id="1_tmrcf"]
 
-[node name="Node2D" type="Node2D" unique_id=670756652]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbfll"]
+radius = 25.079872
 
-[node name="steelboots" type="Sprite2D" parent="." unique_id=1486280492]
-position = Vector2(62, 62)
-texture = ExtResource("1_iajge")
+[sub_resource type="FontFile" id="FontFile_3ejs6"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
-[node name="obsidianboots" type="Sprite2D" parent="." unique_id=627620474]
-position = Vector2(204, 62)
-texture = ExtResource("2_tmrcf")
+[sub_resource type="Theme" id="Theme_dpfrn"]
+default_font = SubResource("FontFile_3ejs6")
+default_font_size = 16
 
-[node name="leafboots" type="Sprite2D" parent="." unique_id=705858304]
-position = Vector2(350, 63)
-texture = ExtResource("3_mn8cu")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpfrn"]
+bg_color = Color(0.6901961, 0.49803922, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 5
 
-[node name="steelChest" type="Sprite2D" parent="." unique_id=2049698687]
-position = Vector2(502, 61)
-texture = ExtResource("4_gb2pk")
+[node name="WorldItem" type="Area2D" unique_id=143990945]
+script = ExtResource("1_tmrcf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1842032577]
+scale = Vector2(0.10013522, 0.1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1943610032]
+shape = SubResource("CircleShape2D_sbfll")
+
+[node name="NameButton" type="Button" parent="." unique_id=545854959]
+custom_minimum_size = Vector2(140, 30)
+offset_left = -70.0
+offset_top = -65.0
+offset_right = 70.0
+offset_bottom = -35.0
+focus_mode = 0
+theme = SubResource("Theme_dpfrn")
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+flat = true
+
+[node name="Panel" type="Panel" parent="NameButton" unique_id=662227715]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dpfrn")
