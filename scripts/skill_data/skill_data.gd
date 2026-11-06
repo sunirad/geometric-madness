@@ -1,15 +1,21 @@
 class_name SkillData
 extends Resource
 
-# ============================================================
-# Данные одного скилла (Ресурс).
-# ============================================================
+enum DamageType {
+	PHYSICAL,
+	MAGICAL
+}
 
 @export var id: String = "basic_attack"
 @export var display_name: String = "Basic Attack"
 @export var icon: Texture2D
-@export var description: String = "A basic sword strike."
+@export_multiline var description: String = "A basic sword strike."
 
-# --- Характеристики ---
-@export var damage: int = 0 # Урон скилла
-@export var support_slots_count: int = 0 # Количество слотов под сапорт-скиллы
+@export_group("Combat")
+@export var damage: int = 0
+@export var damage_type: DamageType = DamageType.PHYSICAL
+@export var mana_cost: int = 0
+@export var can_crit: bool = true
+
+@export_group("Support")
+@export var support_slots_count: int = 0
