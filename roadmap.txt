@@ -13,6 +13,7 @@
     12. skill tree natables
     13. hower on
     14. random stats on items
+    15. 3 classes
 2. Skill system expansion
     1. add 5 base skills per class(tbd)
     2. add weapon bases for each skill catgory
