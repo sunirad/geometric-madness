@@ -4,7 +4,6 @@ extends Node
 @export var min_enemy_distance: float = 120.0
 @export var min_player_distance: float = 200.0
 @export var spawn_attempts: int = 30
-@onready var player: CharacterBody2D = $"../Player"
 @export var initial_enemy_count: int = 5
 @export var respawn_delay: float = 1.5
 @export_group("Loot Settings")
@@ -21,9 +20,15 @@ extends Node
 
 var kills: int = 0
 var game_won: bool = false
-
+var player: CharacterBody2D = null
 
 func _ready() -> void:
+	player = get_tree().get_first_node_in_group("player")
+
+	if not is_instance_valid(player):
+		push_error("GameManager: Игрок не найден в группе 'player'!")
+		return
+
 	win_screen.hide()
 
 	for i in range(initial_enemy_count):
@@ -95,7 +100,6 @@ func spawn_enemy() -> void:
 
 	enemy.died.connect(_on_enemy_died)
 
-	print("Враг появился. Размер: ", random_scale)
 
 func _on_enemy_died(death_position: Vector2) -> void:
 	if game_won:

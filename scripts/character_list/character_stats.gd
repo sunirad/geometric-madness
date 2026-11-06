@@ -53,6 +53,7 @@ extends Resource
 @export var base_intelligence: int = 10:
 	set(value):
 		base_intelligence = value
+		max_mana = get_total_max_mana()
 		stats_changed.emit()
 
 # --- Бонусы от экипировки (заполняются извне, пока 0) ---
@@ -69,6 +70,7 @@ extends Resource
 @export var equip_intelligence_bonus: int = 0:
 	set(value):
 		equip_intelligence_bonus = value
+		max_mana = get_total_max_mana()
 		stats_changed.emit()
 
 # --- Сигналы ---
@@ -85,3 +87,9 @@ func get_total_agility() -> int:
 
 func get_total_intelligence() -> int:
 	return base_intelligence + equip_intelligence_bonus
+
+func get_bonus_max_mana() -> int:
+	return max(0, get_total_intelligence() - 10) * 5
+
+func get_total_max_mana() -> int:
+	return 50 + get_bonus_max_mana()

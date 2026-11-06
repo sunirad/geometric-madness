@@ -86,9 +86,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if action_name != "" and config:
 		var skill = config.get_skill(action_name)
 		if skill != null:
-			if skill.id == "basic_attack" and is_instance_valid(_player_ref):
-				if _player_ref.has_method("attack"):
-					_player_ref.attack(skill) # <-- Передаем скилл для урона
+			if is_instance_valid(_player_ref):
+				if skill.id == "basic_attack":
+					_player_ref.attack(skill)
+				else:
+					_player_ref.cast_skill(skill)
 
 func refresh_slots() -> void:
 	if not config: return
@@ -111,3 +113,20 @@ func _on_clear_requested() -> void:
 	var target_action = skill_picker._target_slot.action_name
 	config.clear_skill(target_action)
 	refresh_slots()
+
+func _process(_delta: float) -> void:
+	if skill_picker and skill_picker.visible:
+		return
+
+	if not is_instance_valid(_player_ref):
+		return
+
+	if get_viewport().gui_get_hovered_control() != null:
+		return
+
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var skill = config.get_skill("MouseLeft") if config else null
+
+		if skill != null and skill.id == "basic_attack":
+			if not _player_ref.is_attacking:
+				_player_ref.attack(skill)

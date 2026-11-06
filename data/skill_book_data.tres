@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://k5vgvpxfi03k" path="res://scripts/skill_data/skill_book/skill_book_data.gd" id="1_1f028"]
 [ext_resource type="Script" uid="uid://bb2npinnkfaft" path="res://scripts/skill_data/skill_data.gd" id="2_vsvui"]
 [ext_resource type="Resource" uid="uid://dnvo8nr665pk2" path="res://data/basic_attack.tres" id="3_vsvui"]
+[ext_resource type="Resource" uid="uid://bryy3rj3rjk1r" path="res://data/molten_strike.tres" id="4_qt5x2"]
 
 [resource]
 script = ExtResource("1_1f028")
-skills = Array[ExtResource("2_vsvui")]([ExtResource("3_vsvui")])
+skills = Array[ExtResource("2_vsvui")]([ExtResource("3_vsvui"), ExtResource("4_qt5x2")])
 metadata/_custom_type_script = "uid://k5vgvpxfi03k"

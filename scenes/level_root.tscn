@@ -1585,6 +1585,7 @@ initial_enemy_count = 22
 world_item_scene = ExtResource("9_advu8")
 loot_drop_chance = 0.288
 loot_items = Array[ExtResource("9_yn2ky")]([ExtResource("10_yn2ky"), ExtResource("11_a7awj"), ExtResource("12_esjri"), ExtResource("13_7sqvf")])
+max_enemy_scale = 3.5
 
 [node name="WinScreen" type="CanvasGroup" parent="." unique_id=1724895883]
 script = ExtResource("8_3xth4")

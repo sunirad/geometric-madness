@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://bryy3rj3rjk1r"]
+
+[ext_resource type="Texture2D" uid="uid://2g1m7ytwl3d8" path="res://assets/img/skills/image-removebg-preview (4).png" id="1_04wes"]
+[ext_resource type="Script" uid="uid://bb2npinnkfaft" path="res://scripts/skill_data/skill_data.gd" id="1_v4xi4"]
+[ext_resource type="PackedScene" uid="uid://v7ym22jkgep3" path="res://scenes/skills_red/molten_strike.tscn" id="2_d61s3"]
+
+[resource]
+script = ExtResource("1_v4xi4")
+id = "molten_strike"
+display_name = "Molten Strike"
+icon = ExtResource("1_04wes")
+skill_scene = ExtResource("2_d61s3")
+damage = 20
+metadata/_custom_type_script = "uid://bb2npinnkfaft"

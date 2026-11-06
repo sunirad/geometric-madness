@@ -60,7 +60,7 @@ explosion_scene = ExtResource("2_smehm")
 texture_filter = 1
 scale = Vector2(-0.11177082, 0.11368338)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
-animation = &"death"
+animation = &"move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1336613771]
 scale = Vector2(0.9956906, 1)

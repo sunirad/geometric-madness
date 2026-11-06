@@ -8,18 +8,20 @@ extends CharacterBody2D
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var hitbox: Area2D = $WeaponPivot/Hitbox
 @onready var sword_sprite: Sprite2D = $WeaponPivot/SwordSprite
+@export var base_health_regen: float = 1.0 # HP в секунду
 
 const BASE_SPEED: float = 300.0
 const BASE_ATTACK_TIME: float = 0.3
-
+const ATTACK_TIME = 0.3
 var physical_damage_multiplier: float = 1.0
 var max_health_increase: float = 1.0
+var _base_max_health: int = 100
 var movement_speed_multiplier: float = 1.0
 var attack_speed_multiplier: float = 1.0
 var critical_chance: float = 0.05
 var critical_multiplier: float = 2.0
 var magic_damage_multiplier: float = 1.0
-
+var _health_regen_accumulator: float = 0.0
 var last_direction : Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var hit_targets: Array[Node2D] = []
@@ -38,13 +40,14 @@ func _ready() -> void:
 			player_stats = stats_nodes[0]
 
 	if player_stats and player_stats.stats:
+		_base_max_health = player_stats.stats.max_health
 		player_stats.stats.stats_changed.connect(_recalculate_attributes)
 		_recalculate_attributes()
 
 func _physics_process(_delta: float) -> void:
 	if get_tree().paused:
 		return
-		
+	process_health_regeneration(_delta)	
 	process_movement()
 	process_animation()
 	
@@ -94,11 +97,21 @@ func rotate_weapon_to_mouse() -> void:
 func attack(skill_data: SkillData = null) -> void:
 	if get_tree().paused:
 		return
+
 	if is_attacking:
 		return
-		
-	_current_skill = skill_data # Запоминаем, каким скиллом бьем
-	
+	if skill_data and skill_data.mana_cost > 0:
+		if not player_stats or not player_stats.stats:
+			push_warning("Не удалось получить характеристики игрока!")
+			return
+
+	if player_stats.stats.current_mana < skill_data.mana_cost:
+		print("Недостаточно маны!")
+		return
+
+	# Списываем ману
+	player_stats.stats.current_mana -= skill_data.mana_cost
+	_current_skill = skill_data
 	hit_targets.clear()
 	is_attacking = true
 	animated_sprite_2d.play("attack")
@@ -108,17 +121,17 @@ func attack(skill_data: SkillData = null) -> void:
 	var base_angle = weapon_pivot.rotation
 	hitbox.monitoring = true
 
+	var attack_speed = maxf(attack_speed_multiplier, 0.1)
+	var attack_duration = ATTACK_TIME / attack_speed
+
 	_attack_tween = create_tween()
-	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle - 1.04, 0.05)
-	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle + 1.04, 0.1)
-	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle, 0.15)
+	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle - 1.04, 0.05 / attack_speed)
+	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle + 1.04, 0.1 / attack_speed)
+	_attack_tween.tween_property(weapon_pivot, "rotation", base_angle, 0.15 / attack_speed)
 
-	var actual_attack_time = BASE_ATTACK_TIME / attack_speed_multiplier
+	await get_tree().create_timer(attack_duration, false).timeout
 
-	await get_tree().create_timer(actual_attack_time, false).timeout
-	
 	if not get_tree().paused:
-		create_ground_explosion()
 		hitbox.monitoring = false
 		is_attacking = false
 #При попадании:
@@ -166,12 +179,6 @@ func take_damage(amount: int) -> void:
 	if player_stats.stats.current_health <= 0:
 		die()
 		
-func create_ground_explosion() -> void:
-	if explosion_scene == null: return
-	var explosion = explosion_scene.instantiate()
-	get_tree().current_scene.add_child(explosion)
-	var direction = weapon_pivot.position.normalized()
-	explosion.global_position = global_position + direction * explosion_distance
 
 
 func _recalculate_attributes() -> void:
@@ -185,6 +192,8 @@ func _recalculate_attributes() -> void:
 	var intelligence = stats.get_total_intelligence()
 
 	physical_damage_multiplier = 1.0 + (strength - 10) * 0.02
+	max_health_increase = 1.0 + max(0, strength - 10) * 0.01
+	stats.max_health = roundi(_base_max_health * max_health_increase)
 	movement_speed_multiplier = 1.0 + (agility - 10) * 0.005
 	attack_speed_multiplier = 1.0 + (agility - 10) * 0.01
 
@@ -200,3 +209,42 @@ func _recalculate_attributes() -> void:
 	print("Сила: ", strength)
 	print("Ловкость: ", agility)
 	print("Интеллект: ", intelligence)
+
+func cast_skill(skill_data: SkillData) -> void:
+	if get_tree().paused:
+		return
+
+	if skill_data == null:
+		return
+
+	if skill_data.skill_scene == null:
+		push_warning("У навыка " + skill_data.display_name + " не назначена сцена!")
+		return
+
+	var skill_instance = skill_data.skill_scene.instantiate()
+
+	get_tree().current_scene.add_child(skill_instance)
+
+	skill_instance.global_position = global_position
+
+	print("Использован навык: ", skill_data.display_name)
+func process_health_regeneration(delta: float) -> void:
+	if not player_stats or not player_stats.stats:
+		return
+
+	var stats = player_stats.stats
+
+	if stats.current_health <= 0:
+		return
+
+	if stats.current_health >= stats.max_health:
+		_health_regen_accumulator = 0.0
+		return
+
+	_health_regen_accumulator += base_health_regen * delta
+
+	if _health_regen_accumulator >= 1.0:
+		var regen_amount = int(_health_regen_accumulator)
+		_health_regen_accumulator -= regen_amount
+
+		stats.current_health += regen_amount
