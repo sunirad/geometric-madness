@@ -1,0 +1,29 @@
+1. basic level: 
+    1. character with basic movement
+    2. enemies with basic movement and AI
+    3. level
+    4. camera
+    5. hp/mp bar
+    6. inventorisation
+    7. items drop
+    8. char stats and dependencies
+    9. basic skill
+    10.basic skill damage and int scaling
+    11. skill tree with stats
+    12. skill tree natables
+    13. hower on
+    14. random stats on items
+2. Skill system expansion
+    1. add 5 base skills per class(tbd)
+    2. add weapon bases for each skill catgory
+    3. add dependencies between weapons and skills (cleave requires axe/sword...)
+    4. first 15-20 support gems
+    5. ...
+4. Enemies system expansion
+    1. ...
+5. First campaign level
+    1. ...
+6. Big graphic update
+    1. Full sprites and animation replace
+    2. ...
+7. ...
